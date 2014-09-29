@@ -1,0 +1,19 @@
+{
+  "name": "arcane-lowlands-2760",
+  "version": "0.1.0",
+  "description": "Web Service for SLIP Group A 2014",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "express": "^4.9.5",
+    "logfmt": "^1.2.0"
+  },
+	"engines": {
+	  "node": "0.10.x"
+	}
+}
