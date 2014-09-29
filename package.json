@@ -10,6 +10,7 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
+    "pg": "2.x",
     "express": "^4.9.5",
     "logfmt": "^1.2.0"
   },
