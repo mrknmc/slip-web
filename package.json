@@ -10,11 +10,11 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "pg": "2.x",
+    "dropbox": "^0.10.3",
     "express": "^4.9.5",
     "logfmt": "^1.2.0"
   },
-	"engines": {
-	  "node": "0.10.x"
-	}
+  "engines": {
+    "node": "0.10.x"
+  }
 }
