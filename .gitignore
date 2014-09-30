@@ -34,5 +34,3 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# Don't push build
-dist
