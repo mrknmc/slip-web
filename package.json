@@ -25,6 +25,7 @@
     "gulp-useref": "~1.0.2",
     "gulp-util": "~3.0.1",
     "gulp-watch": "^1.0.7",
+    "jade": "^1.7.0",
     "logfmt": "^1.2.0",
     "require-dir": "^0.1.0"
   },
