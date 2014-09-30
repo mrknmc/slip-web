@@ -4,7 +4,7 @@ var cache = require('gulp-cache');
 var size = require('gulp-size');
 
 
-gulp.task('images', function () {
+gulp.task('images', ['rimraf'], function () {
     return gulp.src('app/images/**/*')
         .pipe(cache(imagemin({
             optimizationLevel: 3,

@@ -4,7 +4,7 @@ var size = require('gulp-size');
 var handleErrors = require('../util/handleErrors');
 
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['rimraf'], function () {
     return gulp.src('app/scripts/app.js')
         .pipe(browserify({
             insertGlobals: true

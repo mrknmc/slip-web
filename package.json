@@ -31,5 +31,9 @@
   },
   "engines": {
     "node": "0.10.x"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.4.0",
+    "gulp-express": "^0.1.0"
   }
 }

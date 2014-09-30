@@ -5,7 +5,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var handleErrors = require('../util/handleErrors');
 
 
-gulp.task('styles', function () {
+gulp.task('styles', ['rimraf'], function () {
     return gulp.src('app/styles/main.scss')
         .pipe(rubySass({
             style: 'expanded',
