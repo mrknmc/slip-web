@@ -1,11 +1,12 @@
 var gulp = require('gulp');
 var rubySass = require('gulp-ruby-sass');
 var size = require('gulp-size');
+var connect = require('gulp-connect');
 var autoprefixer = require('gulp-autoprefixer');
 var handleErrors = require('../util/handleErrors');
 
 
-gulp.task('styles', ['rimraf'], function () {
+gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe(rubySass({
             style: 'expanded',
@@ -15,5 +16,6 @@ gulp.task('styles', ['rimraf'], function () {
         .on('error', handleErrors)
         .pipe(autoprefixer('last 1 version'))
         .pipe(gulp.dest('dist/styles'))
-        .pipe(size());
+        .pipe(size())
+				.pipe(connect.reload());
 });

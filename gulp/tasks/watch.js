@@ -1,23 +1,23 @@
 var gulp = require('gulp');
-var server = require('gulp-express');
+var connect = require('gulp-connect');
 
 gulp.task('watch', ['build'], function () {
     //start the server at the beginning of the task
-    //server.run({
-    //    env: 'development',
-    //    file: 'web.js'
-    //});
-
+    connect.server({
+      root: ['dist'],
+      port: 5000,
+      livereload: true
+    });
         // Watch .scss files
-    gulp.watch('app/styles/**/*.scss', ['styles', server.notify]);
+    gulp.watch('app/styles/**/*.scss', ['styles']);
 
     // Watch .jade files
-    gulp.watch('app/**/*.jade', ['jade', server.notify]);
+    gulp.watch('app/**/*.jade', ['jade']);
 
     // Watch .js files
-    gulp.watch('app/scripts/**/*.js', ['scripts', server.notify]);
+    gulp.watch('app/scripts/**/*.js', ['scripts']);
 
     // Watch image files
-    gulp.watch('app/images/**/*', ['images', server.run]);
+    gulp.watch('app/images/**/*', ['images']);
 
 });

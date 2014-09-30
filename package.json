@@ -16,6 +16,7 @@
     "gulp-autoprefixer": "^1.0.1",
     "gulp-browserify": "~0.5.0",
     "gulp-cache": "^0.2.2",
+    "gulp-connect": "^2.0.6",
     "gulp-imagemin": "~1.0.1",
     "gulp-jade": "~0.8.0",
     "gulp-notify": "^1.8.0",
