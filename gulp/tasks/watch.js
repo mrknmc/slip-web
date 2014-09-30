@@ -7,7 +7,7 @@ gulp.task('watch', ['rimraf', 'build'], function () {
     gulp.watch('app/styles/**/*.scss', ['styles']);
 
     // Watch .jade files
-    gulp.watch(['app/template/**/*.jade', 'app/index.jade'], ['jade']);
+    gulp.watch('app/**/*.jade', ['jade']);
 
     // Watch .coffeescript files
     gulp.watch('app/scripts/**/*.coffee', ['coffee', 'scripts']);

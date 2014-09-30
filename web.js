@@ -6,8 +6,10 @@ var app = express();
 app.set('views', __dirname + '/dist');
 
 app.engine('jade', require('jade').__express);
-app.use(logfmt.requestLogger());
 app.set('view engine', 'jade');
+
+app.use(logfmt.requestLogger());
+app.use('/styles', express.static(__dirname + '/dist/styles'));
 
 app.get('/', function(req, res) {
   res.render('index');
