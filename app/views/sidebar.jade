@@ -1,14 +1,10 @@
 #sidebar.ui.large.vertical.inverted.labeled.icon.sidebar.menu
-  .item
-    i.dashboard.red.circular.inverted.icon
-    | Dashboard
-    .menu
-      a.active.item Search
-      a.item Add
-      a.item Remove
-  a.item
-    i.grid.layout.blue.circular.inverted.icon
-    | Browse
-  a.item
+  a.active.item(data-tab='solar')
+    i.sun.orange.circular.inverted.icon
+    | Solar Power
+  a.item(data-tab='wind')
+    i.flag.layout.blue.circular.inverted.icon
+    | Wind Power
+  a.item(data-tab='messages')
     i.mail.circular.green.inverted.icon
     | Messages

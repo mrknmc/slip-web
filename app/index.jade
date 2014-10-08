@@ -2,12 +2,17 @@ doctype html
 html
   head
     include ./views/head.jade
-body.side
+body
   include ./views/sidebar.jade
   include ./views/menu.jade
-  .header
 
-  .main
+  .main.container
+    .ui.active.tab(data-tab='solar')
+        h2.ui.header Solar Power
+    .ui.tab(data-tab='wind')
+        h2.ui.header Wind Power
+    .ui.tab(data-tab='messages')
+        h2.ui.header Messages
 
   .footer
 
