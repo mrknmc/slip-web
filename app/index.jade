@@ -7,6 +7,7 @@ body
   include ./views/menu.jade
 
   .main.container
+    .ui.tab(data-tab='user')
     .ui.active.tab(data-tab='solar')
         h2.ui.header
           i.orange.sun.icon
@@ -20,15 +21,7 @@ body
           i.green.mail.icon
           | Messages
 
-  #login.ui.modal.small.transition
-    .header
-      | Log in with Dropbox
-    .content
-      p Our app uses Dropbox to store your data. Please connect.
-    .actions
-      #connect.ui.blue.button
-        i.dropbox.icon
-        | Log in
+  include ./views/login.jade
 
 
   .footer

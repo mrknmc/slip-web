@@ -1,4 +1,3 @@
-
 var APP_KEY = '492mxhrdjmsxqkz';
 
 $('#sidebar').sidebar('attach events', '#sidebar-toggle').sidebar('toggle');
@@ -20,12 +19,27 @@ $(function () {
   });
 
   function updateAuthenticationStatus(err, client) {
-    // If the user is not authenticated, show the authentication modal
     if (!client.isAuthenticated()) {
-        $('#login').modal('setting', 'closable', false).modal('show');
-        return;
+      // If the user is not authenticated, show the authentication modal
+      $('#login').modal('setting', 'closable', false).modal('show');
+      return;
     } else {
+      // Otherwise hide the modal if visible
+      $('#login').modal('hide');
     }
+
+    // Once authenticated, find whether the user is on a team and
+    // update UI accordingly.
+    $('#user').show();
+    client.getAccountInfo(function (err, info) {
+      console.log(info);
+      var json = info._json;
+        // if (json.team) {
+        //     $('#teamName').text(json.team.name);
+        //     $('#teamRole').show();
+        // }
+        $('#user').append(info.name);
+    });
 
   }
 

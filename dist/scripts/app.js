@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-
 var APP_KEY = '492mxhrdjmsxqkz';
 
 $('#sidebar').sidebar('attach events', '#sidebar-toggle').sidebar('toggle');
@@ -22,18 +21,33 @@ $(function () {
   });
 
   function updateAuthenticationStatus(err, client) {
-    // If the user is not authenticated, show the authentication modal
     if (!client.isAuthenticated()) {
-        $('#login').modal('setting', 'closable', false).modal('show');
-        return;
+      // If the user is not authenticated, show the authentication modal
+      $('#login').modal('setting', 'closable', false).modal('show');
+      return;
     } else {
+      // Otherwise hide the modal if visible
+      $('#login').modal('hide');
     }
+
+    // Once authenticated, find whether the user is on a team and
+    // update UI accordingly.
+    $('#user').show();
+    client.getAccountInfo(function (err, info) {
+      console.log(info);
+      var json = info._json;
+        // if (json.team) {
+        //     $('#teamName').text(json.team.name);
+        //     $('#teamRole').show();
+        // }
+        $('#user').append(info.name);
+    });
 
   }
 
 });
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_b967a70f.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4ad57544.js","/")
 },{"buffer":2,"oMfpAn":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
