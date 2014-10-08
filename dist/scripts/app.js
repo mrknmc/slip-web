@@ -1,9 +1,39 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+
+var APP_KEY = '492mxhrdjmsxqkz';
+
 $('#sidebar').sidebar('attach events', '#sidebar-toggle').sidebar('toggle');
 $('#sidebar .item').tab();
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_e328a4d3.js","/")
+$(function () {
+  var client = new Dropbox.Client({key: APP_KEY});
+  client.authDriver(new Dropbox.AuthDriver.Popup({
+      receiverUrl: window.location.origin + '/login.html'
+  }));
+
+  // Check to see if we're authenticated already.
+  client.authenticate({ interactive: false }, updateAuthenticationStatus);
+
+  // Authenticate when the user clicks the connect button.
+  $('#connect').click(function (e) {
+      e.preventDefault();
+      client.authenticate(updateAuthenticationStatus);
+  });
+
+  function updateAuthenticationStatus(err, client) {
+    // If the user is not authenticated, show the authentication modal
+    if (!client.isAuthenticated()) {
+        $('#login').modal('setting', 'closable', false).modal('show');
+        return;
+    } else {
+    }
+
+  }
+
+});
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_b967a70f.js","/")
 },{"buffer":2,"oMfpAn":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

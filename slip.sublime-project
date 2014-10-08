@@ -7,5 +7,9 @@
             "folder_exclude_patterns": [".sass-cache", "node_modules", "dist"],
             "file_exclude_patterns": ["*.sublime-workspace"]
 		}
-	]
+	],
+  "settings":
+  {
+    "tab_size": 2
+  }
 }

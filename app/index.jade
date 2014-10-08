@@ -8,11 +8,28 @@ body
 
   .main.container
     .ui.active.tab(data-tab='solar')
-        h2.ui.header Solar Power
+        h2.ui.header
+          i.orange.sun.icon
+          | Solar Power
     .ui.tab(data-tab='wind')
-        h2.ui.header Wind Power
+        h2.ui.header
+          i.blue.flag.icon
+          | Wind Power
     .ui.tab(data-tab='messages')
-        h2.ui.header Messages
+        h2.ui.header
+          i.green.mail.icon
+          | Messages
+
+  #login.ui.modal.small.transition
+    .header
+      | Log in with Dropbox
+    .content
+      p Our app uses Dropbox to store your data. Please connect.
+    .actions
+      #connect.ui.blue.button
+        i.dropbox.icon
+        | Log in
+
 
   .footer
 
