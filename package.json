@@ -13,7 +13,8 @@
     "dropbox": "^0.10.3",
     "express": "^4.9.5",
     "jade": "^1.7.0",
-    "logfmt": "^1.2.0"
+    "logfmt": "^1.2.0",
+    "passport": "^0.2.1"
   },
   "engines": {
     "node": "0.10.x"
