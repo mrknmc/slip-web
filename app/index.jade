@@ -8,21 +8,23 @@ body
 
   .main.container
     .ui.tab(data-tab='user')
+      h2.ui.header
+        i.purple.user.icon
+        | User Settings
     .ui.active.tab(data-tab='solar')
-        h2.ui.header
-          i.orange.sun.icon
-          | Solar Power
+      h2.ui.header
+        i.orange.sun.icon
+        | Solar Power
     .ui.tab(data-tab='wind')
-        h2.ui.header
-          i.blue.flag.icon
-          | Wind Power
+      h2.ui.header
+        i.blue.flag.icon
+        | Wind Power
     .ui.tab(data-tab='messages')
-        h2.ui.header
-          i.green.mail.icon
-          | Messages
+      h2.ui.header
+        i.green.mail.icon
+        | Messages
 
   include ./views/login.jade
-
 
   .footer
 

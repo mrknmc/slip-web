@@ -30,24 +30,19 @@ $(function () {
       $('#login').modal('hide');
     }
 
-    // Once authenticated, find whether the user is on a team and
-    // update UI accordingly.
+    // Show the user sidebar item
     $('#user').show();
+
+    // Show user's name
     client.getAccountInfo(function (err, info) {
-      console.log(info);
-      var json = info._json;
-        // if (json.team) {
-        //     $('#teamName').text(json.team.name);
-        //     $('#teamRole').show();
-        // }
-        $('#user').append(info.name);
+      $('#user').append(info.name);
     });
 
   }
 
 });
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4ad57544.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_48510aac.js","/")
 },{"buffer":2,"oMfpAn":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!

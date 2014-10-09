@@ -28,17 +28,12 @@ $(function () {
       $('#login').modal('hide');
     }
 
-    // Once authenticated, find whether the user is on a team and
-    // update UI accordingly.
+    // Show the user sidebar item
     $('#user').show();
+
+    // Show user's name
     client.getAccountInfo(function (err, info) {
-      console.log(info);
-      var json = info._json;
-        // if (json.team) {
-        //     $('#teamName').text(json.team.name);
-        //     $('#teamRole').show();
-        // }
-        $('#user').append(info.name);
+      $('#user').append(info.name);
     });
 
   }
