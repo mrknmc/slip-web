@@ -39,7 +39,6 @@ app.route('/measurements')
     Measurement.create(measurement, function (err, small) {
       if (err) {
         res.status(400).json(err);
-        console.log(err);
       } else {
         res.status(201);
       }
