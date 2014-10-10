@@ -8,8 +8,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.use(bodyParser.json());
-
-mongoose.connect('mongodb://heroku:ACRYKKX8Kw3XIOhpx_aVzrTDsVn0reDP6DNSpPtY71lZE5VvTzp7sS_0cpKLG-cYGxfvHF0USPS-ajbGEYAUAg@lennon.mongohq.com:10023/app30177543');
+mongoose.connect(process.env.MONGOHQ_URL);
 
 var measurementSchema = new mongoose.Schema({
   deviceId: String,
