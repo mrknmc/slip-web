@@ -2,7 +2,7 @@ import random
 import time
 
 from dropbox.client import DropboxOAuth2FlowNoRedirect, DropboxClient
-from dropbox.datastore import DatastoreManager
+from dropbox.datastore import DatastoreManager, Datastore
 
 SOLAR_MU = 100
 SOLAR_STD_DEV = 20
@@ -26,23 +26,27 @@ access_token, user_id = auth_flow.finish(auth_code)
 
 client = DropboxClient(access_token)
 manager = DatastoreManager(client)
-datastore = manager.open_default_datastore()
 
-coords = 55.944370, -3.186866
+# create the datastore
+datastore = manager.open_datastore('.2KpSYCh9COM38q_rChYoME5D83LxNgloKAPxDuVMNNQ')
 
-ts = time.time()
+print('Datastore ID: {}'.format(datastore.get_id()))
 
 measurements_table = datastore.get_table('measurements')
 
-for i in range(50):
-    measurement = {
-        'deviceId': '0123012038123',
-        'timestamp': ts,
-        'x-coord': coords[0],
-        'y-coord': coords[1],
-        'solar': random.normalvariate(SOLAR_MU, SOLAR_STD_DEV),
-        'wind': random.normalvariate(WIND_MU, WIND_STD_DEV),
-    }
-    first_task = measurements_table.insert(**measurement)
+# coords = 55.944370, -3.186866
+# ts = time.time()
+
+# for i in range(50):
+#     measurement = {
+#         'deviceId': '0123012038123',
+#         'timestamp': ts + 60.0,
+#         'lightIntensity': random.normalvariate(SOLAR_MU, SOLAR_STD_DEV),
+#         'windDirection': random.choice(range(4)),
+#         'windSpeed': random.normalvariate(WIND_MU, WIND_STD_DEV),
+#         'xCoord': coords[0],
+#         'yCoord': coords[1],
+#     }
+#     first_task = measurements_table.insert(**measurement)
 
 datastore.commit()

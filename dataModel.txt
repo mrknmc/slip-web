@@ -1,0 +1,1 @@
+deviceId, timestamp, xCoord, yCoord, light intensity, windDirection, windSpeed
