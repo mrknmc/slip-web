@@ -9,8 +9,6 @@ var app = express();
 
 app.use(bodyParser.json());
 
-console.log(MONGOHQ_URL);
-
 mongoose.connect('mongodb://heroku:ACRYKKX8Kw3XIOhpx_aVzrTDsVn0reDP6DNSpPtY71lZE5VvTzp7sS_0cpKLG-cYGxfvHF0USPS-ajbGEYAUAg@lennon.mongohq.com:10023/app30177543');
 
 var measurementSchema = new mongoose.Schema({
