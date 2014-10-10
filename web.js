@@ -23,7 +23,8 @@ var measurementSchema = new mongoose.Schema({
 
 var Measurement = mongoose.model('Measurement', measurementSchema);
 
-app.get('/measurements', function(req, res) {
+app.route('/measurements')
+.get(function(req, res) {
   var query = Measurement.find();
   query.exec(function (err, measurements) {
     if (err) {
@@ -32,18 +33,15 @@ app.get('/measurements', function(req, res) {
       return res.json(measurements);
     }
   });
-});
-
-app.post('/measurements', function(req, res) {
-  console.log('wololooo');
+})
+.post(function(req, res) {
   var measurements = req.body;
-  console.log(req.body);
   _.map(measurements, function(measurement) {
     Measurement.create(measurement, function (err, small) {
       if (err) {
         res.status(400).json(err);
       }
-      res.status(200).json({});
+      res.status(201).json({});
     });
   });
 });
