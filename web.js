@@ -6,7 +6,7 @@ var _ = require('underscore');
 var bodyParser = require('body-parser');
 var models = require('./models');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var app = express();
 
@@ -24,17 +24,16 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
 passport.use(new GoogleStrategy({
-    returnURL: 'http://aslip.herokuapp.com/auth/google/return',
-    realm: 'http://aslip.herokuapp.com/'
+    clientID: '455603760930-ll7abjtsuprojm32j8prdv7hrtgg7abn.apps.googleusercontent.com',
+    clientSecret: 'GrSpFoonPVQbskc5JjDrZmuf',
+    callbackURL: "http://localhost:5000/auth/google/callback"
   },
-  function(identifier, profile, done) {
-    models.User.findOne({oauthID: identifier}, function(err, user) {
-      if(err) {
+  function(accessToken, refreshToken, profile, done) {
+    models.User.findOne({oauthID: profile.id}, function(err, user) {
+      if (err) {
         // Probably let the user know he can't login
-      }
-      if (!err && user !== null) {
+      } else if (user !== null) {
         // let the user know he's logged in
         done(null, user);
       }
@@ -42,9 +41,9 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
-app.get('/auth/google/return',
+app.get('/auth/google/callback',
   passport.authenticate('google', {successRedirect: '/',
                                    failureRedirect: '/login'}));
 
@@ -69,10 +68,8 @@ app.route('/measurements')
     });
   });
   if (errors.length === 0) {
-    console.log('sucessful POST');
     res.status(201).end();
   } else {
-    console.log('failed POST');
     res.status(400).json(errors);
   }
 });
