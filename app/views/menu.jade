@@ -2,5 +2,10 @@
   .container
     a#sidebar-toggle.item
       i.reorder.icon
-    div.title.item Group A SLIP 2014
-    a#logout.right.item(href='/logout') Log out
+    if username
+      a#logout.item(href='/logout')
+        i.sign.out.icon
+        | Log out
+    //- a.title.item(href='/')
+    //-   i.home.icon
+    //-   | Group A SLIP 2014

@@ -6,6 +6,7 @@ var _ = require('underscore');
 var bodyParser = require('body-parser');
 
 var passport = require('passport');
+var flash = require('flash');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var models = require('./models');
@@ -58,20 +59,23 @@ passport.use(new GoogleStrategy({
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
 app.get('/auth/google/callback', passport.authenticate('google', {
-  successRedirect: '/',
+  successRedirect: '/dashboard',
   failureRedirect: '/login',
-  failureFlash: true
 }));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('login');
 });
 
 app.get('/dashboard', ensureAuthenticated, function(req, res) {
   res.render('dashboard', {username: req.user.name});
 });
 
-app.get('/logout', function(req, res){
+app.get('/login', function(req, res) {
+  res.render('login');
+});
+
+app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });

@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    include ./head.jade
+body
+
+  .main.container
+    form#login.ui.form.segment(action='auth/google')
+      h1.ui.dividing.header Log in
+      .ui.ribbon.label Our website requires a Google account.
+      button.ui.right.google.plus.button(href=)
+        i.google.plus.sign.large.icon
+        | Login
+
+  .footer
+
+  include ./scripts.jade

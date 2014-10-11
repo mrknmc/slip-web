@@ -25,3 +25,8 @@ html, body {
 #wind-chart .ct-area {
   fill: blue;
 }
+
+#login {
+  width: 50%;
+  margin: 0 auto;
+}
