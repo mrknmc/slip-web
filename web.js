@@ -9,6 +9,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var models = require('./models');
+var api = require('./api');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/styles', express.static(__dirname + '/dist/styles'));
 app.use('/scripts', express.static(__dirname + '/dist/scripts'));
+app.use('/api', api);
 
 mongoose.connect(process.env.MONGOHQ_URL);
 
@@ -55,47 +57,18 @@ passport.use(new GoogleStrategy({
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', {successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true}));
-
-app.route('/measurements')
-.get(function(req, res) {
-  var query = models.Measurement.find(function (err, measurements) {
-    if (err) {
-      return res.json(err);
-    } else {
-      return res.json(measurements);
-    }
-  });
-})
-.post(function(req, res) {
-  var measurements = req.body;
-  var errors = [];
-  _.each(measurements, function(measurement) {
-    // Create obj for every measurement
-    models.Measurement.create(measurement, function (err, small) {
-      if (err) {
-        // save error with other errors
-        errors.push(err);
-      }
-    });
-  });
-  if (errors.length === 0) {
-    res.status(201).end();
-  } else {
-    // return all errors at once
-    res.status(400).json(errors);
-  }
-});
+app.get('/auth/google/callback', passport.authenticate('google', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 app.get('/', function(req, res) {
   res.render('index');
 });
 
 app.get('/dashboard', ensureAuthenticated, function(req, res) {
-  res.render('index', {username: req.user.name});
+  res.render('dashboard', {username: req.user.name});
 });
 
 app.get('/logout', function(req, res){
