@@ -25,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/styles', express.static(__dirname + '/dist/styles'));
 app.use('/scripts', express.static(__dirname + '/dist/scripts'));
+app.use('/images', express.static(__dirname + '/dist/images'));
 app.use('/api', api);
 
 mongoose.connect(process.env.MONGOHQ_URL);

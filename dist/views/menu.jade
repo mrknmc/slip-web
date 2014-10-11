@@ -1,11 +1,24 @@
-#menu.ui.fixed.transparent.menu
+#menu.ui.fixed.large.transparent.menu
   .container
-    a#sidebar-toggle.item
-      i.reorder.icon
+    //- a#sidebar-toggle.item
+    //-   i.reorder.icon
+    a.item(data-tab='home')
+      i.home.teal.icon
+      | Home
+    a.active.item(data-tab='solar')
+      i.sun.orange.icon
+      | Solar Power
+    a.item(data-tab='wind')
+      i.flag.blue.icon
+      | Wind Power
+    a.item(data-tab='map')
+      i.map.green.icon
+      | Map
     if username
-      a#logout.item(href='/logout')
-        i.sign.out.icon
-        | Log out
-    //- a.title.item(href='/')
-    //-   i.home.icon
-    //-   | Group A SLIP 2014
+      .ui.right.item.dropdown
+        i.user.purple.icon
+        .text #{username}
+        .menu
+          a.right.item(href='/logout')
+            i.teal.sign.out.icon
+            | Log out

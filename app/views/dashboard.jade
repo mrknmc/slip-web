@@ -3,28 +3,22 @@ html
   head
     include ./head.jade
 body
-  include ./sidebar.jade
+  //- include ./sidebar.jade
   include ./menu.jade
 
   .main.container
+    .ui.tab(data-tab='home')
+      //- include ./home.jade
     .ui.active.tab(data-tab='solar')
-      h2.ui.divided.header
-        i.orange.sun.icon
-        | Solar Power
-      #solar-chart.ct-chart.ct-double-octave
+      include ./solar.jade
     .ui.tab(data-tab='wind')
-      h2.ui.divided.header
-        i.blue.flag.icon
-        | Wind Power
-      #wind-chart.ct-chart.ct-double-octave
+      include ./wind.jade
     .ui.tab(data-tab='map')
-      h2.ui.divided.header
+      h2.ui.dividing.header
         i.green.map.icon
         | Map
     .ui.tab(data-tab='user')
-      h2.ui.header
-        i.purple.user.icon
-        | User Settings
+      include ./user.jade
 
   .footer
 

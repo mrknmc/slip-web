@@ -1,4 +1,6 @@
 var express = require('express');
+var jwt = require('express-jwt');
+
 var models = require('./models');
 
 var router = express.Router();
