@@ -6,12 +6,12 @@ var handleErrors = require('../util/handleErrors');
 
 
 gulp.task('scripts', function () {
-    return gulp.src('app/scripts/app.js')
-        .pipe(browserify({
-            insertGlobals: true
-        }))
-        .on('error', handleErrors)
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(size())
-				.pipe(connect.reload());
+  return gulp.src('app/scripts/app.js')
+    .pipe(browserify({
+        insertGlobals: true
+    }))
+    .on('error', handleErrors)
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(size())
+  	.pipe(connect.reload());
 });

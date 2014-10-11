@@ -5,3 +5,24 @@ html, body {
 .main {
   padding: 86px 30px;
 }
+
+// hide visibility and squish, but display
+.ui.tab {
+  display: inherit !important;
+  visibility: hidden;
+  height: 0;
+}
+
+// make visible
+.ui.tab.active {
+  display: inherit !important;
+  visibility: visible
+}
+
+#wind-chart .ct-line, #wind-chart .ct-point {
+  stroke: blue;
+}
+
+#wind-chart .ct-area {
+  fill: blue;
+}
