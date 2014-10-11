@@ -68,7 +68,7 @@ app.route('/measurements')
       }
     });
   });
-  if (errors == []) {
+  if (errors.length === 0) {
     console.log('sucessful POST');
     res.status(201);
   } else {
