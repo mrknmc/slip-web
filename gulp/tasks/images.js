@@ -5,7 +5,7 @@ var size = require('gulp-size');
 var connect = require('gulp-connect');
 
 
-gulp.task('images', ['rimraf'], function () {
+gulp.task('images', function () {
     return gulp.src('app/images/**/*')
         .pipe(cache(imagemin({
             optimizationLevel: 3,

@@ -1,10 +1,10 @@
 doctype html
 html
   head
-    include ./views/head.jade
+    include ./head.jade
 body
-  include ./views/sidebar.jade
-  include ./views/menu.jade
+  include ./sidebar.jade
+  include ./menu.jade
 
   .main.container
     .ui.active.tab(data-tab='solar')
@@ -21,13 +21,11 @@ body
       h2.ui.header
         i.green.map.icon
         | Map
-    //- .ui.tab(data-tab='user')
-    //-   h2.ui.header
-    //-     i.purple.user.icon
-    //-     | User Settings
-
-  include ./views/login.jade
+    .ui.tab(data-tab='user')
+      h2.ui.header
+        i.purple.user.icon
+        | User Settings
 
   .footer
 
-  include ./views/scripts.jade
+  include ./scripts.jade
