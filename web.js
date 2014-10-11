@@ -25,9 +25,12 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: '455603760930-ll7abjtsuprojm32j8prdv7hrtgg7abn.apps.googleusercontent.com',
-    clientSecret: 'GrSpFoonPVQbskc5JjDrZmuf',
-    callbackURL: "http://localhost:5000/auth/google/callback"
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    // clientID: '455603760930-ll7abjtsuprojm32j8prdv7hrtgg7abn.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // clientSecret: 'GrSpFoonPVQbskc5JjDrZmuf',
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    // callbackURL: "http://localhost:5000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     models.User.findOne({oauthID: profile.id}, function(err, user) {
