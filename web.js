@@ -26,8 +26,8 @@ passport.deserializeUser(function(obj, done) {
 
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:5000/auth/google/return',
-    realm: 'http://localhost:5000/'
+    returnURL: 'http://aslip.herokuapp.com/auth/google/return',
+    realm: 'http://aslip.herokuapp.com/'
   },
   function(identifier, profile, done) {
     models.User.findOne({oauthID: identifier}, function(err, user) {
@@ -68,7 +68,7 @@ app.route('/measurements')
       }
     });
   });
-  if (errror === []) {
+  if (errors === []) {
     console.log('sucessful POST');
     res.status(201);
   } else {
