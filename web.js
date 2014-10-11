@@ -70,7 +70,7 @@ app.route('/measurements')
   });
   if (errors.length === 0) {
     console.log('sucessful POST');
-    res.status(201);
+    res.status(201).end();
   } else {
     console.log('failed POST');
     res.status(400).json(errors);
