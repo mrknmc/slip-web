@@ -1,31 +1,20 @@
 // app.js
 var express = require('express');
-var passport = require('passport');
 var mongoose = require('mongoose');
 var logfmt = require('logfmt');
 var _ = require('underscore');
 var bodyParser = require('body-parser');
+var Measurement = require('./model');
+// var passport = require('passport');
+
 var app = express();
-
 app.use(bodyParser.json());
+
 mongoose.connect(process.env.MONGOHQ_URL);
-
-var measurementSchema = new mongoose.Schema({
-  deviceId: String,
-  timestamp: Number,
-  xCoord: Number,
-  yCoord: Number,
-  lightIntensity: Number,
-  windDirection: Number,
-  windSpeed: Number,
-});
-
-var Measurement = mongoose.model('Measurement', measurementSchema);
 
 app.route('/measurements')
 .get(function(req, res) {
-  var query = Measurement.find();
-  query.exec(function (err, measurements) {
+  var query = Measurement.find(function (err, measurements) {
     if (err) {
       return res.json(err);
     } else {

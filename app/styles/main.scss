@@ -15,6 +15,7 @@ html, body {
 
 // make visible
 .ui.tab.active {
+  height: inherit;
   display: inherit !important;
   visibility: visible
 }

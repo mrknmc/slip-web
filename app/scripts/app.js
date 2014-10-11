@@ -1,4 +1,4 @@
-$('#sidebar').sidebar('attach events', '#sidebar-toggle', 'toggle');
+$('#sidebar').sidebar('attach events', '#sidebar-toggle', 'toggle').sidebar('show');
 
 var solarOptions = {
   showArea: true,
@@ -31,8 +31,3 @@ var windChart = Chartist.Line('#wind-chart', {
 
 $('#sidebar .item').tab();
 
-function update(argument) {
-  console.log('updating');
-  solarChart.update();
-  windChart.update();
-}
