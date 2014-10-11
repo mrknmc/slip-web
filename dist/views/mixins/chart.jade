@@ -1,12 +1,11 @@
 mixin chart(chartId, title, color)
-  div(class='#{color}').ui.top.attached.menu
-    .ui.title.item #{title}
+  div(class='#{color}').ui.top.attached.large.menu
+    //- .ui.title.item #{title}
     .ui.item.dropdown
-      .text Choice 1
+      .text Last Week
       i.dropdown.icon
       .menu
-        .item(data-value='choice1') Choice 1
-        .item(data-value='choice2') Choice 2
-        .item(data-value='choice3') Choice 3
+        .item(data-value='lastWeek') Last Week
+        .item(data-value='lastMonth') Last Month
   .ui.attached.segment
     div(id='#{chartId}').ct-chart.ct-major-eleventh
