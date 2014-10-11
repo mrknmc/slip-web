@@ -10,6 +10,14 @@ var measurementSchema = new mongoose.Schema({
   windSpeed: Number,
 });
 
-var Measurement = mongoose.model('Measurement', measurementSchema);
+var userSchema = new mongoose.Schema({
+  oauthID: String,
+  name: String,
+  created: Date
+});
 
-module.exports = Measurement;
+var Measurement = mongoose.model('Measurement', measurementSchema);
+var User = mongoose.model('User', userSchema);
+
+module.exports.Measurement = Measurement;
+module.exports.User = User;

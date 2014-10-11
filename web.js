@@ -4,17 +4,53 @@ var mongoose = require('mongoose');
 var logfmt = require('logfmt');
 var _ = require('underscore');
 var bodyParser = require('body-parser');
-var Measurement = require('./model');
-// var passport = require('passport');
+var models = require('./models');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google').Strategy;
 
 var app = express();
+
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(process.env.MONGOHQ_URL);
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://localhost:5000/auth/google/return',
+    realm: 'http://localhost:5000/'
+  },
+  function(identifier, profile, done) {
+    models.User.findOne({oauthID: identifier}, function(err, user) {
+      if(err) {
+        // Probably let the user know he can't login
+      }
+      if (!err && user !== null) {
+        // let the user know he's logged in
+        done(null, user);
+      }
+    });
+  }
+));
+
+app.get('/auth/google', passport.authenticate('google'));
+
+app.get('/auth/google/return',
+  passport.authenticate('google', {successRedirect: '/',
+                                   failureRedirect: '/login'}));
+
 app.route('/measurements')
 .get(function(req, res) {
-  var query = Measurement.find(function (err, measurements) {
+  var query = models.Measurement.find(function (err, measurements) {
     if (err) {
       return res.json(err);
     } else {
@@ -24,15 +60,21 @@ app.route('/measurements')
 })
 .post(function(req, res) {
   var measurements = req.body;
-  _.map(measurements, function(measurement) {
-    Measurement.create(measurement, function (err, small) {
+  var errors = [];
+  _.each(measurements, function(measurement) {
+    models.Measurement.create(measurement, function (err, small) {
       if (err) {
-        res.status(400).json(err);
-      } else {
-        res.status(201);
+        errors.push(err);
       }
     });
   });
+  if (errror === []) {
+    console.log('sucessful POST');
+    res.status(201);
+  } else {
+    console.log('failed POST');
+    res.status(400).json(errors);
+  }
 });
 
 app.use(logfmt.requestLogger());
