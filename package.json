@@ -13,15 +13,14 @@
     "body-parser": "^1.9.0",
     "chartist": "^0.2.1",
     "express": "^4.9.5",
-    "express-jwt": "^0.4.0",
     "express-session": "^1.8.2",
-    "express-subdomain": "^1.0.1",
-    "flash": "^1.1.0",
+    "googleapis": "^1.0.17",
     "jade": "^1.7.0",
     "logfmt": "^1.2.0",
     "mongoose": "^3.8.17",
     "passport": "^0.2.1",
     "passport-google-oauth": "^0.1.5",
+    "redis": "^0.12.1",
     "underscore": "^1.7.0"
   },
   "engines": {

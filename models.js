@@ -1,13 +1,16 @@
 var mongoose = require('mongoose');
 
 var measurementSchema = new mongoose.Schema({
-  deviceId: Number,
-  timestamp: Number,
+  token: String,
+  deviceId: String,
   xCoord: Number,
   yCoord: Number,
-  lightIntensity: Number,
-  windDirection: Number,
-  windSpeed: Number,
+  measurements: [{
+    timestamp: Number,
+    lightIntensity: Number,
+    windDirection: Number,
+    windSpeed: Number,
+  }],
 });
 
 var userSchema = new mongoose.Schema({

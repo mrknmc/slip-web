@@ -2,11 +2,8 @@ var express = require('express');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var logfmt = require('logfmt');
-var _ = require('underscore');
-var bodyParser = require('body-parser');
 
 var passport = require('passport');
-var flash = require('flash');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var models = require('./models');
@@ -19,7 +16,6 @@ app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 
 app.use(logfmt.requestLogger());
-app.use(bodyParser.json());
 app.use(session({secret: 'IgnoSHA-1', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -28,6 +24,7 @@ app.use('/scripts', express.static(__dirname + '/dist/scripts'));
 app.use('/images', express.static(__dirname + '/dist/images'));
 app.use('/api', api);
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGOHQ_URL);
 
 passport.serializeUser(function(user, done) {
