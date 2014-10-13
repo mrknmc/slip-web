@@ -36,3 +36,6 @@ node_modules
 
 # Exclude Sublime Text
 *.sublime-workspace
+
+# Exclude .env file
+.env
