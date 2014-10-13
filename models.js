@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var measurementSchema = new mongoose.Schema({
-  token: String,
+  user: String,
   deviceId: String,
   xCoord: Number,
   yCoord: Number,

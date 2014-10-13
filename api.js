@@ -28,7 +28,7 @@ router.route('/measurements')
 .get(function(req, res) {
   var query = models.Measurement.find(function (err, measurements) {
     if (err) {
-      res.json(err);
+      res.json({'error': err.message});
     } else {
       res.json(measurements);
     }
@@ -52,8 +52,8 @@ router.route('/measurements')
       // make a request to get key from google and store in Redis
       oauth2Client.getFederatedSignonCerts(function(err, certs) {
         if (err) {
-          console.log('Could not get certificates from Google');
-          res.sendStatus(500);
+          // Google is down?, I'm a teapot
+          res.status(418).json({'error': 'Could not get certificates from Google.'});
         } else {
           // store certs in Redis
           redisClient.setex(GOOGLE_PUB_KEY_STR, ONE_DAY, JSON.stringify(certs));
@@ -74,14 +74,20 @@ router.route('/measurements')
 function createMeasurementIfValid(data, certs, callback) {
   try {
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(data.token, certs);
-    models.User.find({oauthID: loginTicket.getUserId()}, function (err, obj) {
-      if (err) {
+    models.User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
+      if (!err && user) {
+        // remove token, add user id
+        console.log(user._id);
+        console.log(user);
+        var measurement = _.chain(data).omit('token').extend({user: user._id}).value();
+        console.log(measurement);
+        models.Measurement.create(measurement, callback);
+      } else if (!err) {
         // User is not authorized to POST data
         throw new Error('User not authorized.');
-      } else if (obj) {
-        models.Measurement.create(_.omit(data, 'token'), function(err, obj) {
-          callback(null, obj);
-        });
+      } else {
+        // Error while accessing the DB
+        throw new Error('Problem accessing MongoDB.');
       }
     });
   } catch (err) {
