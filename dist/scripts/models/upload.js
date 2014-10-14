@@ -1,12 +1,1 @@
-var app = app || {};
-(function() {
-  app.Upload = Backbone.Model.extend({
-    sync: function(method, model, options) {
-      if (method === 'read') {
-        Backbone.sync(method, model, options);
-      } else {
-        console.error('You can not ' + method + ' the Upload model');
-      }
-    },
-  });
-})();
+var app=app||{};!function(){app.Upload=Backbone.Model.extend({sync:function(o,n,a){"read"===o?Backbone.sync(o,n,a):console.error("You can not "+o+" the Upload model")}})}();

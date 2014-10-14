@@ -19,9 +19,6 @@ app.use(logfmt.requestLogger());
 // Static files
 app.use('/styles', express.static(__dirname + '/dist/styles'));
 app.use('/scripts', express.static(__dirname + '/dist/scripts'));
-app.use('/scripts/models', express.static(__dirname + '/dist/scripts/models'));
-app.use('/scripts/views', express.static(__dirname + '/dist/scripts/views'));
-app.use('/scripts/collections', express.static(__dirname + '/dist/scripts/collections'));
 app.use('/images', express.static(__dirname + '/dist/images'));
 
 // Middleware
