@@ -23,5 +23,5 @@ var userSchema = new mongoose.Schema({
 var Measurement = mongoose.model('Measurement', measurementSchema);
 var User = mongoose.model('User', userSchema);
 
-module.exports.Measurement = Measurement;
-module.exports.User = User;
+exports.Measurement = Measurement;
+exports.User = User;

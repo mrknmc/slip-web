@@ -1,92 +1,54 @@
 var express = require('express');
 var session = require('express-session');
-var mongoose = require('mongoose');
+var passport = require('passport');
 var logfmt = require('logfmt');
 
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-var models = require('./models');
-var api = require('./api');
+var api = require('./routes/api');
+var auth = require('./routes/auth');
 
 var app = express();
+var port = Number(process.env.PORT || 5000);
 
+// Set up Jade
 app.set('views', __dirname + '/dist/views');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 
+// Static files
+app.use('/styles', express.static(__dirname + '/dist/styles'));
+app.use('/scripts', express.static(__dirname + '/dist/scripts'));
+app.use('/images', express.static(__dirname + '/dist/images'));
+
+// Middleware
 app.use(logfmt.requestLogger());
 app.use(session({secret: 'IgnoSHA-1', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/styles', express.static(__dirname + '/dist/styles'));
-app.use('/scripts', express.static(__dirname + '/dist/scripts'));
-app.use('/images', express.static(__dirname + '/dist/images'));
+app.use('/auth', auth.router);
 app.use('/api', api);
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGOHQ_URL);
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  models.User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL,
-  },
-  function(accessToken, refreshToken, profile, done) {
-    models.User.findOne({oauthID: profile.id}, function(err, user) {
-      if (err) {
-        // Probably let the user know he can't login
-      } else if (user !== null) {
-        // let the user know he's logged in
-        done(err, user);
-      }
-    });
-  }
-));
-
-app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
-
-app.get('/auth/google/callback', passport.authenticate('google', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/login',
-}));
 
 app.get('/', function(req, res) {
   res.render('login');
 });
 
-app.get('/dashboard', ensureAuthenticated, function(req, res) {
+
+app.get('/dashboard', auth.ensureAuthenticated, function(req, res) {
   res.render('dashboard', {username: req.user.name});
 });
+
 
 app.get('/login', function(req, res) {
   res.render('login');
 });
+
 
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
 
-var port = Number(process.env.PORT || 5000);
 
 app.listen(port, function() {
   console.log('Listening on ' + port);
 });
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
