@@ -30,6 +30,29 @@ var redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready
 redisClient.auth(redisURL.auth.split(':')[1]);
 
 
+router.get('/solar', ensureAuthenticated, function (req, res) {
+  models.Measurement
+    .aggregate()
+    // unwind the measurements
+    .unwind('measurements')
+    // group by deviceId
+    .group({
+      _id: '$deviceId',
+      measurements: {$push: '$measurements'}
+    })
+    // only return lightIntensity and timestamp
+    .project('measurements.lightIntensity measurements.timestamp')
+    .exec(function(err, objs) {
+      if (err) {
+        // Error while executing
+        res.json({'error': err.message});
+      } else {
+        // Measurements found or not
+        res.json(objs);
+      }
+  });
+});
+
 router.get('/users/:id', ensureAuthenticated, function (req, res) {
   // only expose email and name
   models.User.findById(req.params.id, 'email name', function (err, user) {
