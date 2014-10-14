@@ -1,0 +1,7 @@
+script(type='text/template', id='upload-template')
+  td <%- user.name %>
+  td <%- user.email %>
+  td <%- deviceId %>
+  td <%- created %>
+  td
+    a(href='/api/measurements/<%- _id %>')

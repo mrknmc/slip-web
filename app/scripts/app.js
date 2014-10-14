@@ -1,7 +1,12 @@
-$('#sidebar').sidebar('attach events', '#sidebar-toggle', 'toggle').sidebar('show');
-// $('#sidebar .item').tab();
 $('#menu .item').tab();
 $('.ui.dropdown').dropdown();
+
+var app = app || {};
+
+$(function () {
+  'use strict';
+  new app.UploadsView();
+});
 
 var solarOptions = {
   showArea: true,

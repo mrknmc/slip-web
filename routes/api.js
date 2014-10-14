@@ -30,9 +30,9 @@ var redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready
 redisClient.auth(redisURL.auth.split(':')[1]);
 
 
-router.get('/users/:id', ensureAuthenticated, function (req, res, next) {
+router.get('/users/:id', ensureAuthenticated, function (req, res) {
   // only expose email and name
-  models.User.findById(req.params.id, 'email name', function(err, user) {
+  models.User.findById(req.params.id, 'email name', function (err, user) {
     if (err) {
       res.json({'error': err.message});
     } else if (user) {
@@ -44,17 +44,31 @@ router.get('/users/:id', ensureAuthenticated, function (req, res, next) {
 });
 
 
-router.route('/measurements')
-.get(function(req, res) {
-  models.Measurement.find(function (err, measurements) {
+router.get('/measurements/:id', function (req, res) {
+  models.Measurement.findById(req.params.id).populate('user', 'name email').exec(function (err, msrment) {
+    if (err) {
+      res.json({'error': err.message});
+    } else if (msrment) {
+      res.json(msrment);
+    } else {
+      res.status(404).json({});
+    }
+  });
+});
+
+
+router.get('/measurements', function(req, res) {
+  models.Measurement.find().populate('user', 'name email').exec(function (err, measurements) {
     if (err) {
       res.json({'error': err.message});
     } else {
       res.json(measurements);
     }
   });
-})
-.post(function(req, res) {
+});
+
+
+router.post('/measurements', function(req, res) {
   var data = req.body;
 
   redisClient.get(GOOGLE_PUB_KEY_STR, function(err, reply) {
@@ -98,7 +112,10 @@ function createMeasurementIfValid(data, certs, callback) {
     models.User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
       if (!err && user) {
         // remove token, add user _id
-        var msrment = _.chain(data).omit('token').extend({user: user._id}).value();
+        var msrment = _.chain(data)
+          .omit('token')
+          .extend({user: user._id, created: Date.now()})
+          .value();
         models.Measurement.create(msrment, callback);
       } else if (!err) {
         // User is not authorized to POST data

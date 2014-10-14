@@ -9,7 +9,9 @@ body
   .main.container
     .ui.tab(data-tab='home')
       include ./home.jade
-    .ui.active.tab(data-tab='solar')
+    .ui.active.tab(data-tab='uploads')
+      include ./uploads.jade
+    .ui.tab(data-tab='solar')
       include ./solar.jade
     .ui.tab(data-tab='wind')
       include ./wind.jade
@@ -23,5 +25,9 @@ body
   .footer
 
   include ./scripts.jade
+  include ./templates.jade
+  script(src='scripts/models/upload.js')
+  script(src='scripts/collections/uploads.js')
+  script(src='scripts/views/uploadView.js')
+  script(src='scripts/views/uploadsView.js')
   script(src='scripts/app.js')
-

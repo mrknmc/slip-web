@@ -14,13 +14,17 @@ app.set('views', __dirname + '/dist/views');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 
+app.use(logfmt.requestLogger());
+
 // Static files
 app.use('/styles', express.static(__dirname + '/dist/styles'));
 app.use('/scripts', express.static(__dirname + '/dist/scripts'));
+app.use('/scripts/models', express.static(__dirname + '/dist/scripts/models'));
+app.use('/scripts/views', express.static(__dirname + '/dist/scripts/views'));
+app.use('/scripts/collections', express.static(__dirname + '/dist/scripts/collections'));
 app.use('/images', express.static(__dirname + '/dist/images'));
 
 // Middleware
-app.use(logfmt.requestLogger());
 app.use(session({secret: 'IgnoSHA-1', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
