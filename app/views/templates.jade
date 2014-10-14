@@ -5,3 +5,15 @@ script(type='text/template', id='upload-template')
   td 2014-10-14
   td
     | <a href="/api/measurements/<%= _id %>"><%- _id %></a>
+
+script(type='text/template', id='solar-template')
+  .red.ui.top.attached.large.menu
+    .ui.title.item <%- _id %>
+    .ui.item.dropdown
+      .text Last Week
+      i.dropdown.icon
+      .menu
+        .item(data-value='lastWeek') Last Week
+        .item(data-value='lastMonth') Last Month
+  .ui.attached.segment
+    .ct-chart.ct-major-eleventh

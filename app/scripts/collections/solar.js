@@ -1,9 +1,9 @@
 var app = app || {};
 
 (function() {
-  var Uploads = Backbone.Collection.extend({
+  var Solar = Backbone.Collection.extend({
     model: Backbone.Model,
-    url: '/api/measurements',
+    url: '/api/solar',
 
     nextOrder: function () {
       return this.length ? this.last().get('order') + 1 : 1;
@@ -12,5 +12,5 @@ var app = app || {};
     comparator: 'order'
   });
 
-  app.uploads = new Uploads();
+  app.solar = new Solar();
 })();

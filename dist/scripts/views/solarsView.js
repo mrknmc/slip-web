@@ -1,0 +1,1 @@
+var app=app||{};!function(){app.SolarsView=Backbone.View.extend({el:"#solar",initialize:function(){this.listenTo(app.solar,"sync",this.render),app.solar.fetch()},addOne:function(e){var n=new app.SolarView({model:e});this.$el.append(n.render().el)},addAll:function(e){this.$el.html(""),e.each(this.addOne,this)},render:function(e){this.addAll(e)}})}();

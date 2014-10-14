@@ -1,1 +1,0 @@
-var app=app||{};!function(){app.Upload=Backbone.Model.extend({sync:function(o,n,a){"read"===o?Backbone.sync(o,n,a):console.error("You can not "+o+" the Upload model")}})}();

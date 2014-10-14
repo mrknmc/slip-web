@@ -1,11 +1,11 @@
 var app = app || {};
+
 (function() {
   app.UploadsView = Backbone.View.extend({
     el: '#uploads',
 
     initialize: function () {
       this.$tbody = this.$('tbody');
-      // this.$thead = this.$('thead');
       this.listenTo(app.uploads, 'sync', this.render);
       app.uploads.fetch();
     },

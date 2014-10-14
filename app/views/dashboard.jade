@@ -12,7 +12,11 @@ body
     .ui.active.tab(data-tab='uploads')
       include ./uploads.jade
     .ui.tab(data-tab='solar')
-      include ./solar.jade
+      h1.ui.header
+        i.orange.sun.icon
+        | Solar Power
+      #solar
+      //- include ./solar.jade
     .ui.tab(data-tab='wind')
       include ./wind.jade
     .ui.tab(data-tab='map')
@@ -26,8 +30,10 @@ body
 
   include ./scripts.jade
   include ./templates.jade
-  script(src='scripts/models/upload.js')
   script(src='scripts/collections/uploads.js')
+  script(src='scripts/collections/solar.js')
   script(src='scripts/views/uploadView.js')
   script(src='scripts/views/uploadsView.js')
+  script(src='scripts/views/solarView.js')
+  script(src='scripts/views/solarsView.js')
   script(src='scripts/app.js')
