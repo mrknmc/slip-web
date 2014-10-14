@@ -2,6 +2,6 @@ script(type='text/template', id='upload-template')
   td <%- user.name %>
   td <%- user.email %>
   td <%- deviceId %>
-  td <%- created %>
+  td 2014-10-14
   td
-    a(href='/api/measurements/<%- _id %>')
+    | <a href="/api/measurements/<%= _id %>"><%- _id %></a>
