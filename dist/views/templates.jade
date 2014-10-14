@@ -6,9 +6,10 @@ script(type='text/template', id='upload-template')
   td
     | <a href="/api/measurements/<%= _id %>"><%- _id %></a>
 
-script(type='text/template', id='solar-template')
+script(type='text/template', id='chart-template')
   .red.ui.top.attached.large.menu
-    .ui.title.item <%- _id %>
+    .ui.title.item
+      b <%- _id %>
     .ui.item.dropdown
       .text Last Week
       i.dropdown.icon

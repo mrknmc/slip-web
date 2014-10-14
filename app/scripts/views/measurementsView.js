@@ -1,16 +1,15 @@
 var app = app || {};
 
 (function() {
-  app.SolarsView = Backbone.View.extend({
-    el: '#solar',
+  app.MeasurementsView = Backbone.View.extend({
 
     initialize: function () {
       this.listenTo(app.solar, 'sync', this.render);
-      app.solar.fetch();
+      this.collection.fetch();
     },
 
     addOne: function (solar) {
-      var view = new app.SolarView({model: solar});
+      var view = new app.MeasurementView({model: solar});
       this.$el.append(view.render().el);
     },
 

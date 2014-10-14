@@ -1,1 +1,1 @@
-$("#menu .item").tab(),$(".ui.dropdown").dropdown();var app=app||{};$(function(){"use strict";new app.UploadsView,new app.SolarsView});
+var app=app||{};$("#menu .item").tab(),$(function(){"use strict";new app.UploadsView,new app.MeasurementsView({el:"#solar",collection:app.solar}),new app.MeasurementsView({el:"#wind",collection:app.wind})});

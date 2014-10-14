@@ -7,8 +7,8 @@ body
   include ./menu.jade
 
   .main.container
-    .ui.tab(data-tab='home')
-      include ./home.jade
+    //- .ui.tab(data-tab='home')
+    //-   include ./home.jade
     .ui.active.tab(data-tab='uploads')
       include ./uploads.jade
     .ui.tab(data-tab='solar')
@@ -31,9 +31,9 @@ body
   include ./scripts.jade
   include ./templates.jade
   script(src='scripts/collections/uploads.js')
-  script(src='scripts/collections/solar.js')
+  script(src='scripts/collections/measurements.js')
   script(src='scripts/views/uploadView.js')
   script(src='scripts/views/uploadsView.js')
-  script(src='scripts/views/solarView.js')
-  script(src='scripts/views/solarsView.js')
+  script(src='scripts/views/measurementView.js')
+  script(src='scripts/views/measurementsView.js')
   script(src='scripts/app.js')
