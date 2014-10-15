@@ -30,12 +30,8 @@ var app = app || {};
         this.$('.ui.dropdown').dropdown();
         var model = this.model.toJSON();
         this.$el.highcharts({
-          chart: {
-            type: 'area'
-          },
-          title: {
-            text: model._id + ': Light Intensity',
-          },
+          chart: {type: 'area'},
+          title: {text: model._id + ': Light Intensity',},
           xAxis: {
             type: 'datetime',
             title: {
@@ -65,6 +61,7 @@ var app = app || {};
             name: model._id,
             data: _.map(model.measurements, function(msrment) {
               return {
+                // convert to millis
                 x: new Date(msrment.timestamp * 1000),
                 y: msrment.lightIntensity
               };
