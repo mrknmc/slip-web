@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function(Chartist, moment) {
+(function() {
   app.MeasurementView = Backbone.View.extend({
 
     options: {
@@ -23,20 +23,58 @@ var app = app || {};
     render: function() {
       if (this.chart) {
         // if not first time, then just update
-        this.chart.update();
+        this.chart.redraw();
       } else {
         // if first time then render
         this.$el.html(this.template(this.model.toJSON()));
         this.$('.ui.dropdown').dropdown();
-        this.chart = Chartist.Line(this.$('.ct-chart')[0], {
-          labels: [1413321826, 1413321828, 1413321838, 1413321848, 1413321858, 1413321868, 1413321878],
-          series: [
-            [5, 6, 7, 4, 8, 9, 2, 3, 4, 5, 6, 4, 6, 3, 5, 6, 2, 3, 4, 5, 6, 7]
-          ]
-        }, this.options);
+        var model = this.model.toJSON();
+        this.$el.highcharts({
+          chart: {
+            type: 'area'
+          },
+          title: {
+            text: model._id + ': Light Intensity',
+          },
+          xAxis: {
+            type: 'datetime',
+            title: {
+              text: 'Date',
+            },
+          },
+          yAxis: {
+            title: {
+              text: 'Light Intensity'
+            }
+          },
+          plotOptions: {
+            area: {
+              marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                  hover: {
+                      enabled: true
+                  }
+                }
+              }
+            }
+          },
+          series: [{
+            name: model._id,
+            data: _.map(model.measurements, function(msrment) {
+              return {
+                x: new Date(msrment.timestamp * 1000),
+                y: msrment.lightIntensity
+              };
+            }),
+          }]
+        });
+        this.chart = this.$el.highcharts();
       }
       return this;
     },
 
   });
-})(Chartist, moment);
+})();
