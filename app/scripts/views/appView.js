@@ -9,9 +9,12 @@ var app = app || {};
     },
 
     initialize: function() {
-      app.router.on('route', function() {
-        console.log('woot');
-      });
+      // this.listenTo(app.router, 'all', function() {
+      //   console.log('all');
+      // });
+      // app.router.on('route', function() {
+      //   console.log('woot');
+      // });
     },
 
     changeTab: function (e) {

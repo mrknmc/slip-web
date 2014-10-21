@@ -5,14 +5,19 @@ var app = app || {};
 
   var AppRouter = Backbone.Router.extend({
     routes: {
+      'uploads': 'uploads',
       'solar': 'solar',
       'wind': 'wind',
-      'uploads': 'uploads',
       'map': 'map',
     },
 
   });
 
   app.router = new AppRouter();
+  app.router.on('route', function() {
+    $(window).resize();
+  });
+
+
   Backbone.history.start({pushState: true});
 })();
