@@ -43,6 +43,7 @@ router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/login',
 }));
 
+
 exports.router = router;
 
 exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {

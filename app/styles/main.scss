@@ -26,10 +26,6 @@ html, body {
   background-color: #f7f7f7;
 }
 
-.navbar-brand {
-  color: rebeccapurple;
-}
-
 #menu a {
   font-size: 1.1em;
 }
@@ -43,8 +39,8 @@ h1 .fa-sun-o,
   color: orange;
 }
 
-h1 .fa-flag-o,
-#menu .fa-flag-o {
+h1 .fa-flag,
+#menu .fa-flag {
   color: lightskyblue;
 }
 
@@ -58,12 +54,8 @@ h1 .fa-map-marker,
   color: lightgreen;
 }
 
-#wind-chart .ct-line, #wind-chart .ct-point {
-  stroke: blue;
-}
-
-#wind-chart .ct-area {
-  fill: blue;
+.charts .panel-title {
+  margin: 10px 0;
 }
 
 #login {
@@ -73,4 +65,17 @@ h1 .fa-map-marker,
 
 #login img {
   margin: 0 auto;
+}
+
+.jumbotron {
+  background-color: #3A94CB;
+  color: #fff;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.navbar-header .navbar-brand {
+  color: rebeccapurple;
 }

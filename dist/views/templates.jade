@@ -4,10 +4,21 @@ script(type='text/template', id='upload-template')
   td <%- deviceId %>
   td <%- created %>
   td
-    | <a href="/api/measurements/<%= _id %>"><%- _id %></a>
+    | <a href="/api/measurements/<%= _id %>" target="_blank"><%- _id %></a>
 
 script(type='text/template', id='chart-template')
   div.panel.panel-default
     div.panel-heading
+      div.btn-group(style='float: right;')
+        button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+          | Action
+          span.caret
+        ul.dropdown-menu.dropdown-menu-right(role='menu')
+          li
+            a(href='#') Action
+          li
+            a(href='#') Another action
+          li
+            a(href='#') Something else here
       h3.panel-title <%- _id %>
     div.panel-body

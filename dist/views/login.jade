@@ -3,15 +3,16 @@ html
   head
     include ./head.jade
 body
+  include ./menu.jade
 
   .main.container
-    form#login.ui.form.segment(action='auth/google')
-      h1.ui.header Log in
-      //- .ui.ribbon.label Our website requires a Google account.
-      img.ui.circular.image(src='images/renaldas.jpg', alt='Renaldas')
-      button.ui.right.floated.google.plus.button(href=)
-        i.google.plus.sign.large.icon
-        | Login
+    .panel.panel-default
+      form#login.panel-body(action='auth/google')
+        h1.page-title Log in
+        //- img.img-circle(src='images/renaldas.jpg', alt='Renaldas')
+        button.btn.btn-block.btn-social.btn-google-plus.btn-lg
+          i.fa.fa-google
+          | Sign in with Google
 
   .footer
 

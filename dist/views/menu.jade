@@ -1,5 +1,5 @@
 nav.navbar.navbar-default(role='navigation')
-  .container-fluid
+  .container
     .navbar-header
       button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
         span.sr-only Toggle navigation
@@ -8,24 +8,24 @@ nav.navbar.navbar-default(role='navigation')
         span.icon-bar
       span.navbar-brand SLIP A 2014
     #menu.collapse.navbar-collapse
-      ul.nav.navbar-nav(role='tablist')
-        li.uploads.active
-          a(href='#uploads', role='tab', data-url='/uploads', data-toggle='tab')
-            i.fa.fa-arrow-circle-o-up.fa-fw.fa-lg
-            | Uploads
-        li.solar
-          a(href='#solar', role='tab', data-url='/solar', data-toggle='tab')
-            i.fa.fa-sun-o.fa-fw.fa-lg
-            | Solar Power
-        li.wind
-          a(href='#wind', role='tab', data-url='/wind', data-toggle='tab')
-            i.fa.fa-flag-o.fa-fw.fa-lg
-            | Wind Power
-        li.map
-          a(href='#map', role='tab', data-url='/map', data-toggle='tab')
-            i.fa.fa-map-marker.fa-fw.fa-lg
-            | Map
       if username
+        ul.nav.navbar-nav(role='tablist')
+          li.uploads.active
+            a(href='#uploads', role='tab', data-url='/uploads', data-toggle='tab')
+              i.fa.fa-arrow-circle-o-up.fa-fw.fa-lg
+              | Uploads
+          li.solar
+            a(href='#solar', role='tab', data-url='/solar', data-toggle='tab')
+              i.fa.fa-sun-o.fa-fw.fa-lg
+              | Solar Power
+          li.wind
+            a(href='#wind', role='tab', data-url='/wind', data-toggle='tab')
+              i.fa.fa-flag.fa-fw.fa-lg
+              | Wind Power
+          li.map
+            a(href='#map', role='tab', data-url='/map', data-toggle='tab')
+              i.fa.fa-map-marker.fa-fw.fa-lg
+              | Map
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -33,4 +33,12 @@ nav.navbar.navbar-default(role='navigation')
               span.caret
             ul.dropdown-menu(role='menu')
               li
-                a(href='/logout') Log out
+                a(href='/logout')
+                  i.fa.fa-sign-out
+                  | Log out
+      else
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/login')
+              i.fa.fa-sign-in
+              | Log in

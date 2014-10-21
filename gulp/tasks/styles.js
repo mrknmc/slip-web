@@ -11,7 +11,7 @@ gulp.task('styles', function () {
         .pipe(rubySass({
             style: 'expanded',
             precision: 10,
-            loadPath: ['app/bower_components']
+            loadPath: ['bower_components']
         }))
         .on('error', handleErrors)
         .pipe(autoprefixer('last 1 version'))
