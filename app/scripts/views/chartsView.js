@@ -1,15 +1,17 @@
 var app = app || {};
 
 (function() {
-  app.MeasurementsView = Backbone.View.extend({
+  'use strict';
+
+  app.ChartsView = Backbone.View.extend({
 
     initialize: function () {
-      this.listenTo(app.solar, 'sync', this.render);
+      this.listenTo(this.collection, 'sync', this.render);
       this.collection.fetch();
     },
 
-    addOne: function (solar) {
-      var view = new app.MeasurementView({model: solar});
+    addOne: function(model) {
+      var view = new app.ChartView({'model': model});
       this.$el.append(view.render().el);
     },
 
@@ -21,6 +23,7 @@ var app = app || {};
     render: function (collection) {
       this.addAll(collection);
     },
+
 
   });
 })();

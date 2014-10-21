@@ -1,0 +1,1 @@
+var app=app||{};!function(){"use strict";app.Wind=Backbone.Model.extend({defaults:{yAxis:{title:"Wind Power"},xAxis:{type:"datetime",title:{text:"Date"}}},title:function(){return{text:this.get("_id")+": Wind Power"}},getData:function(){return _.map(this.get("measurements"),function(t){return{x:new Date(1e3*t.timestamp),y:t.windSpeed}})}})}();

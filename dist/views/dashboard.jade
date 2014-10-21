@@ -3,37 +3,47 @@ html
   head
     include ./head.jade
 body
-  //- include ./sidebar.jade
   include ./menu.jade
 
-  .main.container
-    //- .ui.tab(data-tab='home')
-    //-   include ./home.jade
-    .ui.active.tab(data-tab='uploads')
+  .main.container.tab-content
+    #uploads.tab-pane.active.container-fluid
+      .page-header
+        h1
+          i.fa.fa-arrow-circle-o-up.fa-fw.fa-lg
+          | Uploads
+          //- small List of uploaded data.
       include ./uploads.jade
-    .ui.tab(data-tab='solar')
-      h1.ui.header
-        i.orange.sun.icon
-        | Solar Power
-      #solar
-      //- include ./solar.jade
-    .ui.tab(data-tab='wind')
-      include ./wind.jade
-    .ui.tab(data-tab='map')
-      h2.ui.dividing.header
-        i.green.map.icon
-        | Map
-    .ui.tab(data-tab='user')
-      include ./user.jade
+    #solar.tab-pane.container-fluid
+      .page-header
+        h1
+          i.fa.fa-sun-o.fa-fw.fa-lg
+          | Solar Power
+      .charts
+    #wind.tab-pane.container-fluid
+      .page-header
+        h1
+          i.fa.fa-flag-o.fa-fw.fa-lg
+          | Wind Power
+      .charts
+    #map.tab-pane
+      .page-header
+        h1
+          i.fa.fa-map-marker.fa-fw.fa-lg
+          | Map
 
   .footer
 
   include ./scripts.jade
   include ./templates.jade
+  script(src='scripts/models/upload.js')
+  script(src='scripts/models/solar.js')
+  script(src='scripts/models/wind.js')
   script(src='scripts/collections/uploads.js')
   script(src='scripts/collections/measurements.js')
   script(src='scripts/views/uploadView.js')
   script(src='scripts/views/uploadsView.js')
-  script(src='scripts/views/measurementView.js')
-  script(src='scripts/views/measurementsView.js')
+  script(src='scripts/views/chartView.js')
+  script(src='scripts/views/chartsView.js')
+  script(src='scripts/views/appView.js')
+  script(src='scripts/routers/router.js')
   script(src='scripts/app.js')

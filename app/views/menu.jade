@@ -1,26 +1,36 @@
-#menu.ui.fixed.large.teal.transparent.menu
-  .container
-    //- a.item(data-tab='home')
-    //-   i.home.teal.icon
-    //-   | Home
-    a.active.item(data-tab='uploads')
-      i.red.upload.icon
-      | Uploads
-    a.item(data-tab='solar')
-      i.sun.orange.icon
-      | Solar Power
-    a.item(data-tab='wind')
-      i.flag.blue.icon
-      | Wind Power
-    a.item(data-tab='map')
-      i.map.green.icon
-      | Map
-    if username
-      .ui.right.item.dropdown
-        i.user.purple.icon
-        .text #{username}
-        .menu
-          a.right.item(href='/logout')
-            i.teal.sign.out.icon
-            | Log out
-        i.dropdown.icon
+nav.navbar.navbar-default(role='navigation')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand SLIP A 2014
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav(role='tablist')
+        li.active
+          a(href='#uploads', role='tab', data-url='/uploads', data-toggle='tab')
+            .fa.fa-arrow-circle-o-up.fa-fw.fa-lg
+            | Uploads
+        li
+          a(href='#solar', role='tab', data-url='/solar', data-toggle='tab')
+            .fa.fa-sun-o.fa-fw.fa-lg
+            | Solar Power
+        li
+          a(href='#wind', role='tab', data-url='/wind', data-toggle='tab')
+            .fa.fa-flag-o.fa-fw.fa-lg
+            | Wind Power
+        li
+          a(href='#map', role='tab', data-url='/map', data-toggle='tab')
+            .fa.fa-map-marker.fa-fw.fa-lg
+            | Map
+      if username
+        ul.nav.navbar-nav.navbar-right
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | #{username}
+              span.caret
+            ul.dropdown-menu(role='menu')
+              li
+                a(href='/logout') Log out

@@ -7,14 +7,7 @@ script(type='text/template', id='upload-template')
     | <a href="/api/measurements/<%= _id %>"><%- _id %></a>
 
 script(type='text/template', id='chart-template')
-  .red.ui.top.attached.large.menu
-    .ui.title.item
-      b <%- _id %>
-    .ui.item.dropdown
-      .text Last Week
-      i.dropdown.icon
-      .menu
-        .item(data-value='lastWeek') Last Week
-        .item(data-value='lastMonth') Last Month
-  .ui.attached.segment
-    .ct-chart.ct-major-eleventh
+  div.panel.panel-default
+    div.panel-heading
+      h3.panel-title <%- _id %>
+    div.panel-body

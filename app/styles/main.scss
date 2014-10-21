@@ -3,22 +3,20 @@ html, body {
 }
 
 .main {
-  padding: 106px 50px;
+  padding: 30px 50px;
 }
 
-// hide visibility and squish, but display
-.ui.tab {
-  display: inherit !important;
-  visibility: hidden;
-  height: 0;
+/* bootstrap hack: fix content width inside hidden tabs */
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: block;     /* undo display:none          */
+    height: 0;          /* height:0 is also invisible */
+    overflow-y: hidden; /* no-overflow                */
 }
-
-// make visible
-.ui.tab.active {
-  height: inherit;
-  display: inherit !important;
-  visibility: visible
-}
+.tab-content > .active,
+.pill-content > .active {
+    height: auto;       /* let the content decide it  */
+} /* bootstrap hack end */
 
 #wind-chart .ct-line, #wind-chart .ct-point {
   stroke: blue;

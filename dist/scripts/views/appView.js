@@ -1,0 +1,1 @@
+var app=app||{};!function(){app.AppView=Backbone.View.extend({el:"body",events:{"click #bs-example-navbar-collapse-1 ul li a":"changeTab"},initialize:function(){app.router.on("route",function(){console.log("woot")})},changeTab:function(a){var e=$(a.currentTarget);app.router.navigate(e.data("url"),{trigger:!0})}})}();

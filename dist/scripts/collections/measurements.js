@@ -1,1 +1,1 @@
-var app=app||{};!function(){var r=Backbone.Collection.extend({model:Backbone.Model,nextOrder:function(){return this.length?this.last().get("order")+1:1},comparator:"order"}),a=new r;a.url="/api/solar",app.solar=a;var e=new r;e.url="/api/wind",app.wind=e}();
+var app=app||{};!function(){var a=Backbone.Collection.extend({}),p=new a([],{model:app.Solar});p.url="/api/solar",app.solar=p;var n=new a([],{model:app.Wind});n.url="/api/wind",app.wind=n}();

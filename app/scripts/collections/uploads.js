@@ -1,16 +1,21 @@
 var app = app || {};
 
-(function() {
+(function(moment) {
   var Uploads = Backbone.Collection.extend({
-    model: Backbone.Model,
+    model: app.Upload,
     url: '/api/measurements',
 
-    nextOrder: function () {
-      return this.length ? this.last().get('order') + 1 : 1;
+    comparator: function (a, b) {
+      if (a.get('created') > b.get('created')) {
+        return -1;
+      }
+      else if (a.get('created') < b.get('created')) {
+        return 1;
+      } else {
+        return 0;
+      }
     },
-
-    comparator: 'order'
   });
 
   app.uploads = new Uploads();
-})();
+})(moment);

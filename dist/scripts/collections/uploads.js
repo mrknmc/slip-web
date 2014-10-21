@@ -1,1 +1,1 @@
-var app=app||{};!function(){var e=Backbone.Collection.extend({model:Backbone.Model,url:"/api/measurements",nextOrder:function(){return this.length?this.last().get("order")+1:1},comparator:"order"});app.uploads=new e}();
+var app=app||{};!function(){var e=Backbone.Collection.extend({model:app.Upload,url:"/api/measurements",comparator:function(e,a){return e.get("created")>a.get("created")?-1:e.get("created")<a.get("created")?1:0}});app.uploads=new e}(moment);

@@ -1,0 +1,1 @@
+var app=app||{};!function(){"use strict";var a=Backbone.Router.extend({routes:{solar:"solar",wind:"wind",uploads:"uploads",map:"map"}});app.router=new a,Backbone.history.start({pushState:!0})}();

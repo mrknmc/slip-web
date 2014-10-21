@@ -29,12 +29,12 @@ app.use('/auth', auth.router);
 app.use('/api', api);
 
 
-app.get('/', function(req, res) {
-  res.render('login');
+app.get('/', auth.ensureAuthenticated, function(req, res) {
+  res.render('dashboard', {username: req.user.name});
 });
 
 
-app.get('/dashboard', auth.ensureAuthenticated, function(req, res) {
+app.get(['/solar', '/wind', '/uploads', '/map'], auth.ensureAuthenticated, function(req, res) {
   res.render('dashboard', {username: req.user.name});
 });
 
