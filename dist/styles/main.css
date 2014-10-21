@@ -24,6 +24,46 @@ html, body {
 }
 
 /* bootstrap hack end */
+.navbar {
+  background-color: #fff;
+}
+
+#menu .navbar-nav > .active a {
+  background-color: #f7f7f7;
+}
+
+.navbar-brand {
+  color: rebeccapurple;
+}
+
+#menu a {
+  font-size: 1.1em;
+}
+
+#menu i.fa {
+  margin-right: 10px;
+}
+
+h1 .fa-sun-o,
+#menu .fa-sun-o {
+  color: orange;
+}
+
+h1 .fa-flag-o,
+#menu .fa-flag-o {
+  color: lightskyblue;
+}
+
+h1 .fa-arrow-circle-o-up,
+#menu .fa-arrow-circle-o-up {
+  color: lightcoral;
+}
+
+h1 .fa-map-marker,
+#menu .fa-map-marker {
+  color: lightgreen;
+}
+
 #wind-chart .ct-line, #wind-chart .ct-point {
   stroke: blue;
 }
