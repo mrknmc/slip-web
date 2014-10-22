@@ -7,8 +7,21 @@ body
 
   .jumbotron
     .container
-      h1 Solar and Wind stuff
-      p.lead Not sure what to put here.
+      h1 Solar and Wind weather station
+      //- img(src='images/project.png')
+
+  .main.container
+    h1.page-header Description
+
+    p.lead The station is a small weatherproof device that gathers data about sunlight intensity (from multiple directions) and wind speed at regular intervals. It is placed outdoors such that the collected data represents the potential of a solar panel/wind turbine installation.
+    p.lead A smartphone app connects to the station over Bluetooth, downloads data, and uploads it to a server in the cloud. The data is then aggregated by the backend server. Web interface provides access to charts and statistics as well as recommendations as to whether an installation of solar panels/wind turbines would pay off.
+    p.lead In the future, the stations could be leased by green energy suppliers who are interested in selling their equipment to the customer afterwards.
+
+    h1.page-header Use Cases
+
+    p.lead Currently, a lot of people might want to install solar/wind power elements on their roofs, but are worried about the exact savings that their household would have. Although some companies already provide estimates based on the location of the customer, the estimates may vary a lot since they are not based on readings from the actual roof that the customer is going to use.
+
+    p.lead Companies that sell green power solutions to households might use this device to help potential customers estimate their power savings. This might convince people to install these solutions in their households. Since the monitoring station module is relatively cheap, this could work at a large scale, without the need for large investments. The module would be simple enough to be installed by the household owner without any prior experience.
 
   .footer
 

@@ -1,12 +1,12 @@
 var app = app || {};
 
-(function () {
+(function (moment) {
   'use strict';
 
   app.Wind = Backbone.Model.extend({
     defaults: {
       yAxis: {
-        title: 'Wind Power',
+        title: 'Wind Speed',
       },
       xAxis: {
         type: 'datetime',
@@ -14,10 +14,28 @@ var app = app || {};
           text: 'Date',
         },
       },
+      plotOptions: {
+        areaspline: {
+          fillOpacity: 0.4,
+          marker: {
+            enabled: false,
+            symbol: 'circle',
+            radius: 2,
+            states: {
+              hover: {
+                  enabled: true
+              }
+            }
+          },
+          tooltip: {
+            valueDecimals: 2,
+          }
+        },
+      },
     },
 
     title: function() {
-      return {text: this.get('_id') + ': Wind Power'};
+      return {text: this.get('_id') + ': Wind Speed'};
     },
 
     getData: function() {
@@ -31,4 +49,4 @@ var app = app || {};
     },
 
   });
-})();
+})(moment);

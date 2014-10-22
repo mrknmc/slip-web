@@ -12,24 +12,12 @@ var app = app || {};
       this.$panelBody = this.$('.panel-body');
       var model = this.model;
       this.$panelBody.highcharts({
-        chart: {type: 'area'},
+        chart: {type: 'areaspline'},
+        credit: {enabled: false},
         title: model.title(),
         xAxis: model.get('xAxis'),
         yAxis: model.get('yAxis'),
-        plotOptions: {
-          area: {
-            marker: {
-              enabled: false,
-              symbol: 'circle',
-              radius: 2,
-              states: {
-                hover: {
-                    enabled: true
-                }
-              }
-            }
-          }
-        },
+        plotOptions: model.get('plotOptions'),
         series: [{
           name: model.get('_id'),
           data: model.getData(),

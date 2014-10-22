@@ -8,9 +8,12 @@ body
   .main.container
     .panel.panel-default
       form#login.panel-body(action='auth/google')
-        h1.page-title Log in
-        //- img.img-circle(src='images/renaldas.jpg', alt='Renaldas')
-        button.btn.btn-block.btn-social.btn-google-plus.btn-lg
+        h1.page-title
+          | Sign in
+
+        img.img-rounded.img-responsive(src='http://thecatapi.com/api/images/get?format=src&type=gif', style='margin: 20px auto;')
+
+        button.btn.btn-block.btn-social.btn-google-plus.btn-lg(style='margin-bottom: 20px;')
           i.fa.fa-google
           | Sign in with Google
 

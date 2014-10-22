@@ -14,6 +14,24 @@ var app = app || {};
           text: 'Date',
         },
       },
+      plotOptions: {
+        areaspline: {
+          fillOpacity: 0.4,
+          marker: {
+            enabled: false,
+            symbol: 'circle',
+            radius: 2,
+            states: {
+              hover: {
+                  enabled: true
+              }
+            }
+          },
+          tooltip: {
+            valueDecimals: 2,
+          }
+        },
+      },
     },
 
     title: function() {
