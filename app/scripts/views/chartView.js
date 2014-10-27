@@ -1,16 +1,19 @@
 var app = app || {};
 
-(function() {
+(function(Pikaday, moment) {
   app.ChartView = Backbone.View.extend({
 
     // Cache the template function for a single item.
     template: _.template($('#chart-template').html()),
 
-    render: function() {
-      // if first time then render
-      this.$el.html(this.template(this.model.toJSON()));
-      this.$panelBody = this.$('.panel-body');
+    initialize: function() {
+      this.listenTo(this.model, 'filtered', this.rerender);
+    },
+
+    rerender: function() {
       var model = this.model;
+
+      this.$panelBody = this.$('.panel-body');
       this.$panelBody.highcharts({
         chart: {type: 'areaspline'},
         credit: {enabled: false},
@@ -27,5 +30,37 @@ var app = app || {};
       return this;
     },
 
+    render: function() {
+      var model = this.model;
+      this.$el.html(this.template(model.toJSON()));
+      var filter = model.get('filter');
+
+      new Pikaday({
+        field: this.$('.datepicker.start')[0],
+        maxDate: new Date(),
+        defaultDate: new Date(filter.start),
+        setDefaultDate: true,
+        onSelect: function() {
+          filter.start = this.getMoment();
+          model.set('filter', filter);
+          model.trigger('filtered');
+        }
+      });
+
+      new Pikaday({
+        field: this.$('.datepicker.end')[0],
+        maxDate: new Date(),
+        defaultDate: new Date(filter.end),
+        setDefaultDate: true,
+        onSelect: function() {
+          filter.end = this.getMoment();
+          model.set('filter', filter);
+          model.trigger('filtered');
+        }
+      });
+
+      return this.rerender();
+    },
+
   });
-})();
+})(Pikaday, moment);

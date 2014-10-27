@@ -85,3 +85,7 @@ h1 .fa-map-marker,
 .navbar-header .navbar-brand {
   color: rebeccapurple;
 }
+
+.charts .datefilter {
+  float: right;
+}

@@ -8,17 +8,16 @@ script(type='text/template', id='upload-template')
 
 script(type='text/template', id='chart-template')
   div.panel.panel-default
-    div.panel-heading
-      div.btn-group(style='float: right;')
-        button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
-          | Action
-          span.caret
-        ul.dropdown-menu.dropdown-menu-right(role='menu')
-          li
-            a(href='#') Action
-          li
-            a(href='#') Another action
-          li
-            a(href='#') Something else here
-      h3.panel-title <%- _id %>
+    div.panel-heading.container-fluid
+      .row
+        h3.panel-title.col-xs-2.col-sm-4 <%- _id %>
+        form.form-horizontal.datefilter.col-xs-10.col-sm-8.row
+          .form-group.pull-right.col-xs-5.row
+            label.control-label.col-xs-5 End Date
+            div.col-xs-7
+              input.form-control.datepicker.end(type='text', placeholder='End Date')
+          .form-group.pull-right.col-xs-5.row
+            label.control-label.col-xs-5 Start Date
+            div.col-xs-7
+              input.form-control.datepicker.start(type='text', placeholder='Start Date')
     div.panel-body

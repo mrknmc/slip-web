@@ -8,7 +8,7 @@ var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 var ensureAuthenticated = require('./auth').ensureAuthenticated;
 
-var models = require('../models');
+var models = require('./models');
 
 var router = express.Router();
 

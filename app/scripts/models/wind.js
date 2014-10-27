@@ -32,6 +32,10 @@ var app = app || {};
           }
         },
       },
+      filter: {
+        start: moment().add(-7, 'days'),
+        end: moment(),
+      },
     },
 
     title: function() {
@@ -39,13 +43,17 @@ var app = app || {};
     },
 
     getData: function() {
-      return _.map(this.get('measurements'), function(msrment) {
-        return {
-          // convert to millis
-          x: new Date(msrment.timestamp * 1000),
-          y: msrment.windSpeed
-        };
-      });
+      var filter = this.get('filter');
+      return _.chain(this.get('measurements'))
+        .map(function (msrment) {
+          return {
+            // convert to millis
+            x: new Date(msrment.timestamp * 1000),
+            y: msrment.windSpeed,
+          };
+        }).filter(function (msrment) {
+          return msrment.x >= filter.start && msrment.x <= filter.end;
+      }).value();
     },
 
   });

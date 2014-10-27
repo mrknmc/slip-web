@@ -3,8 +3,8 @@ var session = require('express-session');
 var passport = require('passport');
 var logfmt = require('logfmt');
 
-var api = require('./routes/api');
-var auth = require('./routes/auth');
+var api = require('./server/api');
+var auth = require('./server/auth');
 
 var app = express();
 var port = Number(process.env.PORT || 5000);
