@@ -109,6 +109,19 @@ router.get('/measurements/:id', ensureAuthenticated, function (req, res) {
 });
 
 
+router.delete('/measurements/:id', ensureAuthenticated, function (req, res) {
+  models.Measurement.remove({_id: req.params.id}, function(err, msrment) {
+    if (err) {
+      res.json({'error': err.message});
+    } else if (msrment) {
+      res.json(msrment);
+    } else {
+      res.status(404).json({});
+    }
+  });
+});
+
+
 router.get('/measurements', ensureAuthenticated, function(req, res) {
   models.Measurement.find().populate('user', 'name email').exec(function (err, measurements) {
     if (err) {
