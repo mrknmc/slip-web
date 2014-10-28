@@ -4,7 +4,12 @@ script(type='text/template', id='upload-template')
   td <%- deviceId %>
   td <%- created %>
   td
-    | <a href="/api/measurements/<%= _id %>" target="_blank"><%- _id %></a>
+    .btn-group.btn-group-sm
+      | <a class='btn btn-primary create' href='<%= url %>' target='_blank'>
+      |  <i class='fa fa-link'></i>
+      | </a>
+      a.btn.btn-danger.delete
+        i.fa.fa-remove
 
 script(type='text/template', id='chart-template')
   div.panel.panel-default
