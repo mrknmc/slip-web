@@ -4,14 +4,16 @@ script(type='text/template', id='upload-template')
   td <%- deviceId %>
   td <%- created %>
   td
-    .btn-group.btn-group-sm
-      | <a class='btn btn-primary create' href='<%= url %>' target='_blank'>
-      |  <i class='fa fa-link'></i>
+    .btn-group
+      | <a class='btn btn-default create' href='<%= url %>' target='_blank'>
+      |  <i class='fa fa-link fa-lg'></i>
       | </a>
-      a.btn.btn-danger.delete
-        i.fa.fa-remove
+      a.btn.btn-default.delete
+        i.fa.fa-remove.fa-lg
 
 script(type='text/template', id='user-template')
+  a.delete.pull-right.btn
+    i.fa.fa-remove.fa-2x
   h4.list-group-item-heading <%- name %>
   p.list-group-item-text <%- email %>
 

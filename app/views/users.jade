@@ -1,0 +1,21 @@
+.list-group
+#add-user-modal.modal.fade
+  .modal-dialog
+    form#add-user-form.form-horizontal.modal-content(role='form')
+      .modal-header
+        button.close(type='button', data-dismiss='modal')
+          span(aria-hidden='true') &times;
+          span.sr-only Close
+        h4.modal-title Add User
+      .modal-body
+        .form-group
+          label.col-sm-2.control-label(for='name') Name
+          .col-sm-10
+            input#name.form-control(type='text', placeholder='Name')
+        .form-group
+          label.col-sm-2.control-label(for='email') Email
+          .col-sm-10
+            input#email.form-control(type='email', placeholder='Email')
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close
+        button.submit.btn.btn-primary(type='submit', data-dismiss='modal') Add User

@@ -31,10 +31,13 @@ body
           | Map
     #users.tab-pane
       .page-header
+        a.btn.btn-primary.pull-right(data-toggle='modal' data-target='#add-user-modal')
+          i.fa.fa-plus.fa-fw
+          | Add User
         h1
           i.fa.fa-users.fa-fw.fa-lg
           | Users
-      .list-group
+      include ./users.jade
 
   .footer
 

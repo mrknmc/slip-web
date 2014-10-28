@@ -24,7 +24,15 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL,
   },
   function(accessToken, refreshToken, profile, done) {
-    models.User.findOne({oauthID: profile.id}, function(err, user) {
+    models.User.findOneAndUpdate(
+      // find by oauthID or email
+      {$or:[
+        {oauthID: profile.id},
+        {email: profile.emails[0].value}
+      ]},
+      // update email if not present yet
+      {email: profile.emails[0].value},
+      function(err, user) {
       if (err) {
         // Probably let the user know he can't login
       } else if (user !== null) {

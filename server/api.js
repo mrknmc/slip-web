@@ -53,6 +53,7 @@ router.get('/solar', ensureAuthenticated, function (req, res) {
   });
 });
 
+
 router.get('/wind', ensureAuthenticated, function (req, res) {
   models.Measurement
     .aggregate()
@@ -76,7 +77,21 @@ router.get('/wind', ensureAuthenticated, function (req, res) {
   });
 });
 
-router.get('/users', ensureAuthenticated, function(req, res){
+
+router.post('/users', ensureAuthenticated, function (req, res) {
+  var data = _.extend(req.body, {created: Date.now()});
+  console.log(data);
+  models.User.create(data, function(err, obj) {
+        if (err) {
+          res.status(400).json({'error': err.message});
+        } else if (obj) {
+          res.status(201).json(obj);
+        }
+      });
+});
+
+
+router.get('/users', ensureAuthenticated, function (req, res) {
   models.User.find(function (err, users) {
     if (err) {
       res.json({'error': err.message});
@@ -87,6 +102,20 @@ router.get('/users', ensureAuthenticated, function(req, res){
     }
   });
 });
+
+
+router.delete('/users/:id', ensureAuthenticated, function (req, res) {
+  models.User.remove({_id: req.params.id}, function(err, msrment) {
+    if (err) {
+      res.json({'error': err.message});
+    } else if (msrment) {
+      res.json(msrment);
+    } else {
+      res.status(404).json({});
+    }
+  });
+});
+
 
 router.get('/users/:id', ensureAuthenticated, function (req, res) {
   models.User.findById(req.params.id, function (err, user) {

@@ -5,16 +5,16 @@ var app = app || {};
     tagName: 'a',
     className: 'list-group-item',
 
-    // events: {
-    //   'click a.delete': 'delete',
-    // },
+    events: {
+      'click a.delete': 'delete',
+    },
 
     // Cache the template function for a single item.
     template: _.template($('#user-template').html()),
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
-      // this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, 'destroy', this.remove);
     },
 
     delete: function(e) {
