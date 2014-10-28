@@ -11,6 +11,10 @@ script(type='text/template', id='upload-template')
       a.btn.btn-danger.delete
         i.fa.fa-remove
 
+script(type='text/template', id='user-template')
+  h4.list-group-item-heading <%- name %>
+  p.list-group-item-text <%- email %>
+
 script(type='text/template', id='chart-template')
   div.panel.panel-default
     div.panel-heading.container-fluid

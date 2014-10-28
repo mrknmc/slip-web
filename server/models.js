@@ -16,7 +16,10 @@ var measurementSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-  oauthID: String,
+  oauthID: {
+    type: String,
+    select: false,
+  },
   name: String,
   email: String,
   created: Date,

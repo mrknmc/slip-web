@@ -76,9 +76,20 @@ router.get('/wind', ensureAuthenticated, function (req, res) {
   });
 });
 
+router.get('/users', ensureAuthenticated, function(req, res){
+  models.User.find(function (err, users) {
+    if (err) {
+      res.json({'error': err.message});
+    } else if (users) {
+      res.json(users);
+    } else {
+      res.status(404).json({});
+    }
+  });
+});
+
 router.get('/users/:id', ensureAuthenticated, function (req, res) {
-  // only expose email and name
-  models.User.findById(req.params.id, 'email name', function (err, user) {
+  models.User.findById(req.params.id, function (err, user) {
     if (err) {
       // Error while executing
       res.json({'error': err.message});
