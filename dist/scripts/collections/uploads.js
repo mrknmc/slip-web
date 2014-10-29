@@ -1,1 +1,0 @@
-var app=app||{};!function(){var e=Backbone.Collection.extend({model:app.Upload,url:"/api/measurements",comparator:function(e,a){return e.get("created")>a.get("created")?-1:e.get("created")<a.get("created")?1:0}});app.uploads=new e}(moment);

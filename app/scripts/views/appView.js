@@ -1,21 +1,28 @@
-var app = app || {};
+var Backbone = require('backbone');
+var router = require('../routers/router');
+var measurements = require('../collections/measurements');
+var UploadsView = require('./uploadsView');
+var UsersView = require('./usersView');
+var ChartsView = require('./chartsView');
 
-(function() {
-  app.AppView = Backbone.View.extend({
-    el: 'body',
 
-    events: {
-      'click #menu ul li a': 'changeTab',
-    },
+module.exports = Backbone.View.extend({
+  el: 'body',
 
-    initialize: function() {
-    },
+  events: {
+    'click #menu ul li a': 'changeTab',
+  },
 
-    changeTab: function (e) {
-      var target = $(e.currentTarget);
-      app.router.navigate(target.data('url'), {trigger: true});
-    },
+  initialize: function() {
+    new UploadsView();
+    new UsersView();
+    new ChartsView({el: '#solar .charts', collection: measurements.solar});
+    new ChartsView({el: '#wind .charts', collection: measurements.wind});
+  },
 
-  });
+  changeTab: function (e) {
+    var target = $(e.currentTarget);
+    router.navigate(target.data('url'), {trigger: true});
+  },
 
-})();
+});

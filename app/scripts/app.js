@@ -1,11 +1,4 @@
-var app = app || {};
+var Backbone = require('backbone');
+var AppView = require('./views/appView');
 
-$(function () {
-  'use strict';
-  new app.AppView();
-  new app.UploadsView();
-  new app.UsersView();
-  new app.ChartsView({el: '#solar .charts', collection: app.solar});
-  new app.ChartsView({el: '#wind .charts', collection: app.wind});
-});
-
+new AppView();

@@ -1,43 +1,41 @@
-var app = app || {};
+var Backbone = require('backbone');
+var UserView = require('./userView');
+var users = require('../collections/users');
 
-(function() {
-  app.UsersView = Backbone.View.extend({
-    el: '#users',
+module.exports = Backbone.View.extend({
+  el: '#users',
 
-    events: {
-      'click #add-user-form .submit' : 'create'
-    },
+  events: {
+    'click #add-user-form .submit' : 'create'
+  },
 
-    initialize: function () {
-      this.$list = this.$('.list-group');
-      this.listenTo(app.users, 'add', this.addOne);
-      // this.listenTo(app.users, 'sync', this.render);
-      app.users.fetch();
-    },
+  initialize: function () {
+    this.$list = this.$('.list-group');
+    this.listenTo(users, 'add', this.addOne);
+    // this.listenTo(users, 'sync', this.render);
+    users.fetch();
+  },
 
-    create: function(e) {
-      // e.preventDefault();
-      app.users.create({
-        name: this.$('#name').val().trim(),
-        email: this.$('#email').val().trim(),
-      });
-    },
+  create: function(e) {
+    // e.preventDefault();
+    users.create({
+      name: this.$('#name').val().trim(),
+      email: this.$('#email').val().trim(),
+    });
+  },
 
-    addOne: function (user) {
-      console.log('u wot m8');
-      var view = new app.UserView({model: user});
-      this.$list.append(view.render().el);
-      console.log('meh?');
-    },
+  addOne: function (user) {
+    var view = new UserView({model: user});
+    this.$list.append(view.render().el);
+  },
 
-    addAll: function (collection) {
-      this.$list.html('');
-      collection.each(this.addOne, this);
-    },
+  addAll: function (collection) {
+    this.$list.html('');
+    collection.each(this.addOne, this);
+  },
 
-    render: function (collection) {
-      this.addAll(collection);
-    },
+  render: function (collection) {
+    this.addAll(collection);
+  },
 
-  });
-})();
+});

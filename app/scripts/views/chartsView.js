@@ -1,29 +1,25 @@
-var app = app || {};
+var Backbone = require('backbone');
+var ChartView = require('./chartView');
 
-(function() {
-  'use strict';
+module.exports = Backbone.View.extend({
 
-  app.ChartsView = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.collection, 'sync', this.render);
+    this.collection.fetch();
+  },
 
-    initialize: function () {
-      this.listenTo(this.collection, 'sync', this.render);
-      this.collection.fetch();
-    },
+  addOne: function(model) {
+    var view = new ChartView({'model': model});
+    this.$el.append(view.render().el);
+  },
 
-    addOne: function(model) {
-      var view = new app.ChartView({'model': model});
-      this.$el.append(view.render().el);
-    },
+  addAll: function (collection) {
+    this.$el.html('');
+    collection.each(this.addOne, this);
+  },
 
-    addAll: function (collection) {
-      this.$el.html('');
-      collection.each(this.addOne, this);
-    },
+  render: function (collection) {
+    this.addAll(collection);
+  },
 
-    render: function (collection) {
-      this.addAll(collection);
-    },
-
-
-  });
-})();
+});

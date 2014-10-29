@@ -6,13 +6,13 @@ var connect = require('gulp-connect');
 
 
 gulp.task('images', function () {
-    return gulp.src('app/images/**/*')
-        .pipe(cache(imagemin({
-            optimizationLevel: 3,
-            progressive: true,
-            interlaced: true
-        })))
-        .pipe(gulp.dest('dist/images'))
-        .pipe(size())
-				.pipe(connect.reload());
+  return gulp.src('app/images/**/*')
+    .pipe(cache(imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/images'))
+    .pipe(size())
+		.pipe(connect.reload());
 });

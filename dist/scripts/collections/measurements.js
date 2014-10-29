@@ -1,1 +1,0 @@
-var app=app||{};!function(){var a=Backbone.Collection.extend({}),p=new a([],{model:app.Solar});p.url="/api/solar",app.solar=p;var n=new a([],{model:app.Wind});n.url="/api/wind",app.wind=n}();

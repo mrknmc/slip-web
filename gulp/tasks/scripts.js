@@ -1,19 +1,31 @@
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
-var uglify = require('gulp-uglify');
-var size = require('gulp-size');
+var bundleLogger = require('../util/bundleLogger');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
 var connect = require('gulp-connect');
 var handleErrors = require('../util/handleErrors');
 
 
 gulp.task('scripts', function () {
-  return gulp.src('app/scripts/**/*.js')
-    // .pipe(browserify({
-    //     insertGlobals: true
-    // }))
-    .pipe(uglify())
-    .on('error', handleErrors)
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(size())
-  	.pipe(connect.reload());
+  var bundler = browserify({
+    // Required watchify args
+    cache: {}, packageCache: {}, fullPaths: true,
+    // Specify the entry point of your app
+    entries: './app/scripts/app.js',
+  });
+
+  var bundle = function () {
+    bundler
+      .bundle()
+      .on('error', handleErrors)
+      .pipe(source('app.js'))
+      .pipe(gulp.dest('dist/scripts'));
+  };
+
+  // bundler.on('update', function(){
+  //   bundle();
+  // });
+
+  return bundle();
 });

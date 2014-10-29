@@ -80,7 +80,6 @@ router.get('/wind', ensureAuthenticated, function (req, res) {
 
 router.post('/users', ensureAuthenticated, function (req, res) {
   var data = _.extend(req.body, {created: Date.now()});
-  console.log(data);
   models.User.create(data, function(err, obj) {
         if (err) {
           res.status(400).json({'error': err.message});

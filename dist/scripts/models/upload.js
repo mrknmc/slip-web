@@ -1,1 +1,0 @@
-var app=app||{};!function(t){"use strict";app.Upload=Backbone.Model.extend({idAttribute:"_id",niceCreated:function(){return t(this.get("created")).format("llll")},toDisplay:function(){return _.extend(this.toJSON(),{created:this.niceCreated(),url:this.url()})}})}(moment);

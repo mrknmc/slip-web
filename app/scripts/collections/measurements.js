@@ -1,15 +1,16 @@
-var app = app || {};
+var Backbone = require('backbone');
+var Solar = require('../models/solar');
+var Wind = require('../models/wind');
 
-(function() {
-  var Measurements = Backbone.Collection.extend({
+var Measurements = Backbone.Collection.extend({
 
-  });
+});
 
-  var solar = new Measurements([], {model: app.Solar});
-  solar.url = '/api/solar';
-  app.solar = solar;
+var solar = new Measurements([], {model: Solar});
+solar.url = '/api/solar';
+exports.solar = solar;
 
-  var wind = new Measurements([], {model: app.Wind});
-  wind.url = '/api/wind';
-  app.wind = wind;
-})();
+var wind = new Measurements([], {model: Wind});
+wind.url = '/api/wind';
+exports.wind = wind;
+

@@ -1,10 +1,9 @@
-var app = app || {};
+var Backbone = require('backbone');
+var User = require('../models/user');
 
-(function(moment) {
-  var Users = Backbone.Collection.extend({
-    model: app.User,
-    url: '/api/users',
-  });
+var Users = Backbone.Collection.extend({
+  model: User,
+  url: '/api/users',
+});
 
-  app.users = new Users();
-})(moment);
+module.exports = new Users();

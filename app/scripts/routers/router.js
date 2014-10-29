@@ -1,23 +1,20 @@
-var app = app || {};
+var Backbone = require('backbone');
 
-(function () {
-  'use strict';
+var AppRouter = Backbone.Router.extend({
+  routes: {
+    'uploads': 'uploads',
+    'solar': 'solar',
+    'wind': 'wind',
+    'map': 'map',
+  },
 
-  var AppRouter = Backbone.Router.extend({
-    routes: {
-      'uploads': 'uploads',
-      'solar': 'solar',
-      'wind': 'wind',
-      'map': 'map',
-    },
+});
 
-  });
+router = new AppRouter();
+router.on('route', function() {
+  $(window).resize();
+});
 
-  app.router = new AppRouter();
-  app.router.on('route', function() {
-    $(window).resize();
-  });
+Backbone.history.start({pushState: true});
 
-
-  Backbone.history.start({pushState: true});
-})();
+module.exports = router;
