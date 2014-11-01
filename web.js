@@ -38,6 +38,11 @@ app.get(['/', '/solar', '/wind', '/uploads', '/map', '/users'], function(req, re
 });
 
 
+app.get('/model', function(req, res) {
+  res.render('model');
+});
+
+
 app.get('/login', function(req, res) {
   res.render('login');
 });
