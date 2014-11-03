@@ -19,7 +19,7 @@ html
         var sphere = new THREE.SphereGeometry(200, 8, 4, 0, Math.PI * 2, 0, Math.PI / 2);
         //- var material = new THREE.MeshNormalMaterial();
         var material = new THREE.MeshBasicMaterial({
-          color: 0xff0000,
+          color: 0xffffff,
           vertexColors: THREE.FaceColors,
           shading: THREE.FlatShading,
           overdraw: true,
@@ -32,10 +32,16 @@ html
         sphereMesh.dynamic = true;
         sphereMesh.needsUpdate = true;
 
-        var f;
-        for (var i = 0; i < sphere.faces.length; i++) {
-            f = sphere.faces[i];
-            f.color.setRGB(Math.random(), Math.random(), Math.random());
+        var f1, f2;
+        var one, two, three;
+        for (var i = 8; i < sphere.faces.length; i+=2) {
+            f1 = sphere.faces[i];
+            f2 = sphere.faces[i+1];
+            one = Math.random();
+            two = Math.random();
+            three = Math.random();
+            f1.color.setRGB(one, two, three);
+            f2.color.setRGB(one, two, three);
         }
 
         scene = new THREE.Scene();
