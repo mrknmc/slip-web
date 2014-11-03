@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var rubySass = require('gulp-ruby-sass');
 var size = require('gulp-size');
-var connect = require('gulp-connect');
+var livereload = require('gulp-livereload');
 var autoprefixer = require('gulp-autoprefixer');
 var handleErrors = require('../util/handleErrors');
 
@@ -17,5 +17,5 @@ gulp.task('styles', function () {
     .pipe(autoprefixer('last 1 version'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(size())
-    .pipe(connect.reload());
+    .pipe(livereload());
 });

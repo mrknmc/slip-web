@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
+var livereload = require('gulp-livereload');
 var handleErrors = require('../util/handleErrors');
 
 
@@ -14,7 +15,8 @@ gulp.task('scripts', function () {
     return bundler.bundle()
       .on('error', handleErrors)
       .pipe(source('app.js'))
-      .pipe(gulp.dest('dist/scripts'));
+      .pipe(gulp.dest('dist/scripts'))
+      .pipe(livereload());
   }
 
   return rebundle();
