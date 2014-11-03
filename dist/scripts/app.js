@@ -12,7 +12,7 @@ var Backbone="undefined"!=typeof window?window.Backbone:"undefined"!=typeof glob
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../models/upload":"/Users/mark/slip-web/app/scripts/models/upload.js"}],"/Users/mark/slip-web/app/scripts/collections/users.js":[function(require,module,exports){
 (function (global){
-var Backbone="undefined"!=typeof window?window.Backbone:"undefined"!=typeof global?global.Backbone:null,User=require("../models/user"),Users=Backbone.Collection.extend({model:User,url:"/api/users"});module.exports=new Users;
+var Backbone="undefined"!=typeof window?window.Backbone:"undefined"!=typeof global?global.Backbone:null,User=require("../models/user"),Users=Backbone.Collection.extend({model:User,url:"/api/user"});module.exports=new Users;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../models/user":"/Users/mark/slip-web/app/scripts/models/user.js"}],"/Users/mark/slip-web/app/scripts/models/solar.js":[function(require,module,exports){
 (function (global){

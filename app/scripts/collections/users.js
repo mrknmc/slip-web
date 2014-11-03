@@ -3,7 +3,7 @@ var User = require('../models/user');
 
 var Users = Backbone.Collection.extend({
   model: User,
-  url: '/api/users',
+  url: '/api/user',
 });
 
 module.exports = new Users();
