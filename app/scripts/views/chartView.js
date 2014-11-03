@@ -10,6 +10,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'filtered', this.rerender);
+    this.listenTo(this.model, 'change', this.rerender);
   },
 
   rerender: function() {
