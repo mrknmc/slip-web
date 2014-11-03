@@ -31,7 +31,7 @@ exports.findById = function (req, res) {
 
 
 exports.deleteById = function (req, res) {
-  Measurement.remove({_id: req.params.id}, function(err, msrment) {
+  Measurement.findByIdAndRemove(req.params.id, function(err, msrment) {
     if (err) {
       res.json({'error': err.message});
     } else if (msrment) {
@@ -124,7 +124,7 @@ function createMeasurementIfValid(data, certs, callback) {
     // Try verify the JWT
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(data.token, certs);
     // Confirm that user is authorized
-    models.User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
+    User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
       if (err) {
         // Error while executing
         throw new Error('Problem accessing MongoDB.');
@@ -134,7 +134,7 @@ function createMeasurementIfValid(data, certs, callback) {
           .omit('token')
           .extend({user: user._id, created: Date.now()})
           .value();
-        models.Measurement.create(msrment, callback);
+        Measurement.create(msrment, callback);
       } else {
         // User is not authorized to POST data
         throw new Error('User not authorized.');

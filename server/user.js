@@ -44,7 +44,7 @@ exports.findById = function (req, res) {
 
 
 exports.deleteById = function (req, res) {
-  User.remove({_id: req.params.id}, function(err, msrment) {
+  User.findByIdAndRemove(req.params.id, function(err, msrment) {
     if (err) {
       res.json({'error': err.message});
     } else if (msrment) {

@@ -25,15 +25,24 @@ app.use('/images', express.static(__dirname + '/dist/images'));
 app.use(session({secret: 'IgnoSHA-1', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/auth', auth.router);
+app.use('/auth', auth);
 app.use('/api', api);
 
 
-app.get(['/', '/solar', '/wind', '/uploads', '/map', '/users'], function(req, res) {
+app.get('/', function(req, res) {
   if (req.isAuthenticated()) {
     res.render('dashboard', {username: req.user.name});
   } else {
     res.render('index');
+  }
+});
+
+
+app.get(['/solar', '/wind', '/uploads', '/map', '/users'], function(req, res) {
+  if (req.isAuthenticated()) {
+    res.render('dashboard', {username: req.user.name});
+  } else {
+    res.redirect('/');
   }
 });
 

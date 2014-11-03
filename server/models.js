@@ -44,5 +44,5 @@ var measurementSchema = new mongoose.Schema({
 
 
 exports.Measurement = mongoose.model('Measurement', measurementSchema);
-exports.Upload = mongoose.model('Upload', measurementSchema);
+exports.Upload = mongoose.model('Upload', uploadSchema);
 exports.User = mongoose.model('User', userSchema);
