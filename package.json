@@ -13,13 +13,13 @@
   "private": true,
   "browserify": {
     "transform": [
-      "browserify-shim",
+      "browserify-global-shim",
       "uglifyify"
     ]
   },
-  "browserify-shim": {
-    "backbone": "global:Backbone",
-    "moment": "global:moment"
+  "browserify-global-shim": {
+    "backbone": "Backbone",
+    "moment": "moment"
   },
   "dependencies": {
     "backbone": "^1.1.2",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "browserify": "^6.2.0",
-    "browserify-shim": "^3.8.0",
+    "browserify-global-shim": "^1.0.0",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-cache": "^0.2.4",
@@ -57,7 +57,6 @@
     "gulp-watch": "^1.1.0",
     "require-dir": "^0.1.0",
     "uglifyify": "^2.6.0",
-    "unpathify": "^0.1.4",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1"
   }

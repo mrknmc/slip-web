@@ -8,7 +8,11 @@ var handleErrors = require('../util/handleErrors');
 
 
 gulp.task('scripts', function () {
-  var bundler = watchify(browserify('./app/scripts/app.js', watchify.args));
+  var bundler = watchify(browserify('./app/scripts/app.js', {
+    cache: {},
+    packageCache: {},
+    fullPaths: true,
+  }));
 
   // Ignore moment from Pikaday
   bundler.ignore('moment');
@@ -17,10 +21,10 @@ gulp.task('scripts', function () {
   bundler.on('update', rebundle);
 
   function rebundle() {
-    return bundler.bundle()
-      .on('error', handleErrors)
+    return bundler
+      .bundle()
       .pipe(source('app.js'))
-      // .pipe(unpathify())
+      .on('error', handleErrors)
       .pipe(gulp.dest('dist/scripts'))
       .pipe(livereload());
   }
