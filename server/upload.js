@@ -1,5 +1,5 @@
 var models = require('./models');
-var _ = require('underscore');
+var _ = require('lodash');
 var User = models.User;
 var Upload = models.Upload;
 var handleError = require('./util').handleError;

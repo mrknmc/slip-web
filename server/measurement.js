@@ -3,7 +3,7 @@ var redisClient = require('./redisClient');
 var User = models.User;
 var Measurement = models.Measurement;
 var handleError = require('./util').handleError;
-var _ = require('underscore');
+var _ = require('lodash');
 var google = require('googleapis');
 
 // Set-up Google Client, secret and url not used
