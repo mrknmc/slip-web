@@ -71,13 +71,13 @@ function ensureAuthorized(req, res, next) {
       if (reply !== null) {
         // certificates were in Redis
         var certs = JSON.parse(reply.toString());
-        verifyCertsAndToken(token, certs, res, next);
+        verifyCertsAndToken(token, certs, req, res, next);
       } else {
         // certificates were not in Redis
         oauth2Client.getFederatedSignonCerts(function(err, certs) {
           if (certs !== null) {
             redisClient.setex(GOOGLE_PUB_KEY_STR, ONE_DAY, JSON.stringify(certs));
-            verifyCertsAndToken(token, certs, res, next);
+            verifyCertsAndToken(token, certs, req, res, next);
           } else {
             res.status(418).json({'error': 'Could not retrieve certificates from Google.'});
           }
@@ -91,7 +91,7 @@ function ensureAuthorized(req, res, next) {
 }
 
 
-function verifyCertsAndToken(token, certs, res, next) {
+function verifyCertsAndToken(token, certs, req, res, next) {
   try {
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(token, certs);
     User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
