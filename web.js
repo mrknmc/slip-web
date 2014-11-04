@@ -22,7 +22,12 @@ app.use('/scripts', express.static(__dirname + '/dist/scripts'));
 app.use('/images', express.static(__dirname + '/dist/images'));
 
 // Middleware
-app.use(session({secret: 'IgnoSHA-1', saveUninitialized: true, resave: true}));
+app.use(session({
+  secret: 'IgnoSHA-1',
+  cookie: { secure: true },
+  saveUninitialized: true,
+  resave: true,
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', auth);
