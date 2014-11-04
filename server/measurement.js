@@ -56,64 +56,16 @@ exports.findAll = function(req, res) {
 
 
 exports.addMeasurement = function(req, res) {
-  var data = req.body;
-  redisClient.get(GOOGLE_PUB_KEY_STR, function(err, reply) {
-    if (reply !== null) {
-      // certificates were in Redis
-      var certs = JSON.parse(reply.toString());
-      createMeasurementIfValid(data, certs, function(err, obj) {
-        if (err) {
-          res.status(400).json({'error': err.message});
-        } else {
-          res.status(201).json(obj);
-        }
-      });
-    } else {
-      // make a request to get key from google and store in Redis
-      oauth2Client.getFederatedSignonCerts(function(err, certs) {
-        if (err) {
-          // Google is down?, I'm a teapot
-          res.status(418).json({'error': 'Could not get certificates from Google.'});
-        } else {
-          // store certs in Redis
-          redisClient.setex(GOOGLE_PUB_KEY_STR, ONE_DAY, JSON.stringify(certs));
-          // create measurement if valid
-          createMeasurementIfValid(data, certs, function(err, obj) {
-            if (err) {
-              res.status(400).json({'error': err.message});
-            } else {
-              res.status(201).json(obj);
-            }
-          });
-        }
-      });
+  var msrment = _.chain(req.body)
+    .omit('token')
+    .extend({user: req.user._id, created: Date.now()})
+    .value();
+
+  Measurement.create(msrment, function(err, msrment) {
+    if (err) {
+      handleError(err, res);
+    } else if (msrment) {
+      res.status(201).json(msrment);
     }
   });
 };
-
-
-function createMeasurementIfValid(data, certs, callback) {
-  try {
-    // Try verify the JWT
-    var loginTicket = oauth2Client.verifySignedJwtWithCerts(data.token, certs);
-    // Confirm that user is authorized
-    User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
-      if (err) {
-        // Error while executing
-        throw new Error('Problem accessing MongoDB.');
-      } else if (user) {
-        // user authorized - remove token, add user id and date
-        var msrment = _.chain(data)
-          .omit('token')
-          .extend({user: user._id, created: Date.now()})
-          .value();
-        Measurement.create(msrment, callback);
-      } else {
-        // User is not authorized to POST data
-        throw new Error('User not authorized.');
-      }
-    });
-  } catch (err) {
-    callback(err, null);
-  }
-}
