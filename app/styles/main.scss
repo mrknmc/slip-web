@@ -2,9 +2,9 @@ html, body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.main {
-  padding: 30px 50px;
-}
+// .main {
+//   padding: 30px 50px;
+// }
 
 /* bootstrap hack: fix content width inside hidden tabs */
 .tab-content > .tab-pane,
@@ -59,8 +59,24 @@ h1 .fa-map-marker,
   color: lightgreen;
 }
 
+.page-header i {
+  margin-right: 15px;
+}
+
+.charts .panel-heading {
+  background-color: #f1f6fc;
+}
+
 .charts .panel-title {
-  margin: 10px 0;
+  margin: 8px 0;
+}
+
+.charts .panel-body {
+  padding: 0px;
+}
+
+.charts .form-group {
+  margin-bottom: 0px;
 }
 
 #login {
@@ -83,12 +99,6 @@ h1 .fa-map-marker,
 
 .navbar-header .navbar-brand {
   color: rebeccapurple;
-}
-
-.charts .datefilter {
-  float: right;
-  // width: 33%;
-  // min-width: 256px;
 }
 
 .delete .fa-remove {

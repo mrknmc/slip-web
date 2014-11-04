@@ -4,14 +4,15 @@ var moment = require('moment');
 module.exports = Backbone.Model.extend({
   defaults: function() {
     return {
+      color: '#87cefa',
       yAxis: {
         title: 'Wind Speed',
       },
       xAxis: {
         type: 'datetime',
-        title: {
-          text: 'Date',
-        },
+        // title: {
+        //   text: 'Date',
+        // },
       },
       plotOptions: {
         areaspline: {

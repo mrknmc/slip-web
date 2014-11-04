@@ -4,14 +4,15 @@ var moment = require('moment');
 module.exports = Backbone.Model.extend({
   defaults: function() {
     return {
+      color: '#ff8c00',
       yAxis: {
         title: 'Light Intensity',
       },
       xAxis: {
         type: 'datetime',
-        title: {
-          text: 'Date',
-        },
+        // title: {
+        //   text: 'Date',
+        // },
       },
       plotOptions: {
         areaspline: {
@@ -58,7 +59,7 @@ module.exports = Backbone.Model.extend({
           y: msrment.lightIntensity,
         };
       }).filter(function (msrment) {
-        return msrment.x >= filter.start && msrment.x < filter.end.clone().add(1, 'days');
+        return msrment.x >= filter.start && msrment.x < moment(filter.end).add(1, 'days');
     }).value();
   },
 

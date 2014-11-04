@@ -18,17 +18,17 @@ script(type='text/template', id='user-template')
   p.list-group-item-text <%- email %>
 
 script(type='text/template', id='chart-template')
-  div.panel.panel-default
-    div.panel-heading.container-fluid
+  .panel.panel-default
+    .panel-heading.container-fluid
       .row
-        h3.panel-title.col-xs-2.col-sm-4 <%- _id %>
-        form.form-horizontal.datefilter.col-xs-10.col-sm-8.row
-          .form-group.pull-right.col-xs-5.row
-            label.control-label.col-xs-5 End Date
-            div.col-xs-7
+        h3.panel-title.col-sm-2.col-md-3.col-lg-3 <%- _id %>
+        form.form-horizontal.datefilter.col-sm-10.col-md-9.col-lg-9.row
+          .form-group.col-sm-6.col-md-6.col-lg-6.pull-right.row
+            label.control-label.col-sm-5.col-md-5.col-lg-0.visible-sm-block.visible-md-block End Date
+            div.col-sm-7.col-md-7.col-lg-12
               input.form-control.datepicker.end(type='text', placeholder='End Date')
-          .form-group.pull-right.col-xs-5.row
-            label.control-label.col-xs-5 Start Date
-            div.col-xs-7
+          .form-group.col-sm-6.col-md-6.col-lg-6.pull-right.row
+            label.control-label.col-sm-5.col-md-5.col-lg-0.visible-sm-block.visible-md-block Start Date
+            div.col-sm-7.col-md-7.col-lg-12
               input.form-control.datepicker.start(type='text', placeholder='Start Date')
-    div.panel-body
+    .panel-body

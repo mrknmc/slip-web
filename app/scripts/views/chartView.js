@@ -5,6 +5,8 @@ var Pikaday = require('pikaday');
 
 module.exports = Backbone.View.extend({
 
+  className: 'col-md-12 col-lg-6',
+
   // Cache the template function for a single item.
   template: _.template($('#chart-template').html()),
 
@@ -19,12 +21,14 @@ module.exports = Backbone.View.extend({
     this.$panelBody = this.$('.panel-body');
     this.$panelBody.highcharts({
       chart: {type: 'areaspline'},
-      credit: {enabled: false},
+      legend: {enabled: false},
+      credits: {enabled: false},
       title: model.title(),
       xAxis: model.get('xAxis'),
       yAxis: model.get('yAxis'),
       plotOptions: model.get('plotOptions'),
       series: [{
+        color: model.get('color'),
         name: model.get('_id'),
         data: model.getData(),
       }]
@@ -43,9 +47,11 @@ module.exports = Backbone.View.extend({
       maxDate: new Date(),
       defaultDate: new Date(filter.start),
       setDefaultDate: true,
-      onSelect: function() {
-        filter.start = this.getMoment();
-        model.set('filter', filter);
+      onSelect: function(date) {
+        model.set('filter', {
+          end: model.get('filter').end,
+          start: moment(date),
+        });
         model.trigger('filtered');
       }
     });
@@ -55,9 +61,11 @@ module.exports = Backbone.View.extend({
       maxDate: new Date(),
       defaultDate: new Date(filter.end),
       setDefaultDate: true,
-      onSelect: function() {
-        filter.end = this.getMoment();
-        model.set('filter', filter);
+      onSelect: function(date) {
+        model.set('filter', {
+          start: model.get('filter').start,
+          end: moment(date),
+        });
         model.trigger('filtered');
       }
     });
