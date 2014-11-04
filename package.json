@@ -30,7 +30,7 @@
     "googleapis": "^1.0.20",
     "jade": "^1.7.0",
     "logfmt": "^1.2.0",
-    "mongoose": "^3.8.18",
+    "mongoose": "^3.8",
     "passport": "^0.2.1",
     "passport-google-oauth": "^0.1.5",
     "pikaday": "^1.2.0",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "browserify": "^6.2.0",
     "browserify-shim": "^3.8.0",
-    "gulp": "^3.8.9",
+    "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-cache": "^0.2.4",
     "gulp-imagemin": "~1.2.1",
@@ -59,6 +59,6 @@
     "uglifyify": "^2.6.0",
     "unpathify": "^0.1.4",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.1.0"
+    "watchify": "^2.1.1"
   }
 }

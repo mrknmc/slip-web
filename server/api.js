@@ -1,8 +1,10 @@
 var express = require('express');
+var logfmt = require('logfmt');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var User = require('./models').User;
+var handleError = require('./util').handleError;
 var redisClient = require('./redisClient');
 var solar = require('./solar');
 var wind = require('./wind');
@@ -95,15 +97,19 @@ function verifyCertsAndToken(token, certs, req, res, next) {
   try {
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(token, certs);
     User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
-      if (user !== null) {
+      if (error) {
+        handleError(err, res);
+      } else if (user) {
         req.user = user;
         return next();
       } else {
+        //user not found - not authorized
+        logfmt.error({error: 'Unauthorized user trying to submit data.'});
         res.status(401).json({});
       }
     });
   } catch (err) {
-    console.log(err.message);
+    logfmt.error(err);
     res.status(400).json({'error': err.message});
   }
 }

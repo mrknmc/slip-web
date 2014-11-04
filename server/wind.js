@@ -1,5 +1,5 @@
 var Measurement = require('./models').Measurement;
-
+var handleError = require('./util').handleError;
 
 exports.findAll = function (req, res) {
   Measurement
@@ -15,10 +15,8 @@ exports.findAll = function (req, res) {
     .project('measurements.windSpeed measurements.windDirection measurements.timestamp')
     .exec(function(err, objs) {
       if (err) {
-        // Error while executing
-        res.json({'error': err.message});
+        handleError(err, res);
       } else {
-        // Measurements found or not
         res.json(objs);
       }
   });
