@@ -1,5 +1,7 @@
 var express = require('express');
 var session = require('express-session');
+var redisClient = require('./server/redisClient');
+var RedisStore = require('connect-redis')(session);
 var passport = require('passport');
 var logfmt = require('logfmt');
 
@@ -23,8 +25,10 @@ app.use('/images', express.static(__dirname + '/dist/images'));
 
 // Middleware
 app.use(session({
+  store: new RedisStore({
+    client: redisClient,
+  }),
   secret: 'IgnoSHA-1',
-  cookie: { secure: true },
   saveUninitialized: true,
   resave: true,
 }));

@@ -24,6 +24,7 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "body-parser": "^1.9.2",
+    "connect-redis": "^2.1.0",
     "express": "^4.10.1",
     "express-session": "^1.9.1",
     "googleapis": "^1.0.20",
@@ -56,6 +57,7 @@
     "gulp-watch": "^1.1.0",
     "require-dir": "^0.1.0",
     "uglifyify": "^2.6.0",
+    "unpathify": "^0.1.4",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.0"
   }
