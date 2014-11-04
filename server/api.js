@@ -94,7 +94,7 @@ function ensureAuthorized(req, res, next) {
 function verifyCertsAndToken(token, certs, res, next) {
   try {
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(token, certs);
-    models.User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
+    User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
       if (user !== null) {
         req.user = user;
         return next();
