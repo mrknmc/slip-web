@@ -69,6 +69,10 @@ h1 .fa-map-marker,
   background-color: #f1f6fc;
 }
 
+.charts .panel-heading input {
+  font-size: 10pt;
+}
+
 .charts .panel-title {
   margin: 8px 0;
 }

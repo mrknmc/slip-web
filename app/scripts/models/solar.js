@@ -50,12 +50,6 @@ module.exports = Backbone.Model.extend({
   getData: function() {
     // have some sensible filter defaults
     var filter = this.get('filter');
-
-    var m = this.get('measurements')[0];
-    console.log(m);
-    console.log(util.intensitySum(m));
-    console.log(util.intensityAngle(m));
-
     return _.chain(this.get('measurements'))
       .map(function (msrment) {
         return {

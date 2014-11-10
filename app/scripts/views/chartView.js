@@ -46,6 +46,7 @@ module.exports = Backbone.View.extend({
       field: this.$('.datepicker.start')[0],
       maxDate: new Date(),
       defaultDate: new Date(filter.start),
+      // format: 'D MMM YYYY',
       setDefaultDate: true,
       onSelect: function(date) {
         model.set('filter', {
@@ -61,6 +62,7 @@ module.exports = Backbone.View.extend({
       maxDate: new Date(),
       defaultDate: new Date(filter.end),
       setDefaultDate: true,
+      // format: 'D MMM YYYY',
       onSelect: function(date) {
         model.set('filter', {
           start: model.get('filter').start,
