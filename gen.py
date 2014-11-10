@@ -25,7 +25,7 @@ def main(days=7, freq=3600):
         timestamp = timestamp + freq
         d = {
             'wind_speed': random.gauss(40, 3),
-            'light_intensities': [int(random.gauss(100, 20)) for i in xrange(DIODE_COUNT)],
+            'light_intensities': [int(random.gauss(60, 20)) for i in xrange(DIODE_COUNT)],
             'timestamp': timestamp,
         }
 

@@ -1,9 +1,9 @@
-var Measurement = require('./models').Measurement;
+var Upload = require('./models').Upload;
 var handleError = require('./util').handleError;
 
 
 exports.findAll = function (req, res) {
-  Measurement
+  Upload
     .aggregate()
     // unwind the measurements
     .unwind('measurements')
@@ -13,7 +13,7 @@ exports.findAll = function (req, res) {
       measurements: {$push: '$measurements'}
     })
     // only return lightIntensity and timestamp
-    .project('measurements.lightIntensity measurements.timestamp')
+    .project('measurements.lightIntensities measurements.timestamp')
     .exec(function(err, objs) {
       if (err) {
         handleError(err, res);

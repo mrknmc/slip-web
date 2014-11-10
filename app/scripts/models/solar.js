@@ -10,9 +10,6 @@ module.exports = Backbone.Model.extend({
       },
       xAxis: {
         type: 'datetime',
-        // title: {
-        //   text: 'Date',
-        // },
       },
       plotOptions: {
         areaspline: {
@@ -46,6 +43,32 @@ module.exports = Backbone.Model.extend({
 
   title: function() {
     return {text: this.get('_id') + ': Solar Power'};
+  },
+
+  getIntensitySum: function(msrment) {
+    var sum = _.reduce(msrment.lightIntensities, function(sum, num) {
+      return sum + num;
+    });
+  },
+
+  getIntensityAngle: function(msrment) {
+    // only take inner ring for now
+    var innerRing = _.first(msrment.lightIntensities, 8);
+    var angle;
+    var vectors = _.map(innerRing, function(intensity, idx) {
+      angle = (Math.PI * idx) / 4;
+      return {
+        x: intensity * Math.cos(angle),
+        y: intensity * Math.sin(angle),
+      };
+    });
+    console.log(vectors);
+    var vectorSum = _.reduce(vectors, function(result, vec, key) {
+      result.x += vec.x;
+      result.y += vec.y;
+      return result;
+    }, {x: 0, y:0});
+    return Math.atan(vectorSum.y/vectorSum.x);
   },
 
   getData: function() {

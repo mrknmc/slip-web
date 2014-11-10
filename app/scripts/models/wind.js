@@ -10,9 +10,6 @@ module.exports = Backbone.Model.extend({
       },
       xAxis: {
         type: 'datetime',
-        // title: {
-        //   text: 'Date',
-        // },
       },
       plotOptions: {
         areaspline: {

@@ -1,8 +1,9 @@
-var Measurement = require('./models').Measurement;
+var Upload = require('./models').Upload;
 var handleError = require('./util').handleError;
 
+
 exports.findAll = function (req, res) {
-  Measurement
+  Upload
     .aggregate()
     // unwind the measurements
     .unwind('measurements')
