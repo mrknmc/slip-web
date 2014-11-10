@@ -97,7 +97,7 @@ function verifyCertsAndToken(token, certs, req, res, next) {
   try {
     var loginTicket = oauth2Client.verifySignedJwtWithCerts(token, certs);
     User.findOne({oauthID: loginTicket.getUserId()}, function (err, user) {
-      if (error) {
+      if (err) {
         handleError(err, res);
       } else if (user) {
         req.user = user;
