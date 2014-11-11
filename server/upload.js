@@ -1,4 +1,5 @@
 var models = require('./models');
+var location = require('./location');
 var _ = require('lodash');
 var User = models.User;
 var Upload = models.Upload;
@@ -54,11 +55,17 @@ exports.addUpload = function(req, res) {
     .extend({user: req.user._id, created: Date.now()})
     .value();
 
-  Upload.create(upload, function(err, upload) {
-    if (err) {
-      handleError(err, res);
-    } else if (upload) {
-      res.status(201).json(upload);
+  location.getLocation(upload.xCoord, upload.yCoord, function(err, loc) {
+    if (loc) {
+      upload = _.extend(upload, {location: location.prettyLocation(loc)});
     }
+    Upload.create(upload, function(err, upload) {
+      if (err) {
+        handleError(err, res);
+      } else if (upload) {
+        res.status(201).json(upload);
+      }
+    });
   });
+
 };

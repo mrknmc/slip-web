@@ -7,6 +7,7 @@ var uploadSchema = new mongoose.Schema({
   xCoord: Number,
   yCoord: Number,
   created: Date,
+  location: String,
   solar: [{
     timestamp: Number,
     values: [Number],

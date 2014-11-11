@@ -3,14 +3,31 @@ var redisClient = require('./redisClient');
 var ONE_DAY = 86400;
 
 
-exports.findByCoords = function (req, res) {
-  var coords = req.query.xCoord + ',' + req.query.yCoord;
+exports.findByCoords = function(req, res) {
+  prettyLocation(req.query.xCoord, req.query.yCoord, function(err, loc) {
+    if (loc) {
+      res.json(address);
+    } else {
+      res.status(418).json({'error': 'Could not retrieve coordinates from MapQuest.'});
+    }
+  });
+};
+
+
+exports.prettyLocation = function(data) {
+  var loc = data.results[0].locations[0];
+  return loc.street + ', ' + loc.adminArea5 + ', ' + loc.adminArea3;
+};
+
+
+exports.getLocation = function(xCoord, yCoord, callback) {
+  var coords = xCoord + ',' + yCoord;
 
   redisClient.get(coords, function(err, reply) {
     if (reply !== null) {
       // coordinates were in Redis
       var address = JSON.parse(reply.toString());
-      res.json(address);
+      callback(null, address);
     } else {
       // coordinates were not in Redis
       var url = 'http://open.mapquestapi.com/geocoding/v1/reverse?key=' +
@@ -22,9 +39,9 @@ exports.findByCoords = function (req, res) {
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             redisClient.setex(coords, ONE_DAY, JSON.stringify(body));
-            res.json(body);
+            callback(null, body);
           } else {
-            res.status(418).json({'error': 'Could not retrieve coordinates from MapQuest.'});
+            callback(error, null);
           }
       });
     }
