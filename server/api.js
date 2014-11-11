@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var User = require('./models').User;
 var handleError = require('./util').handleError;
 var redisClient = require('./redisClient');
+var location = require('./location');
 var solar = require('./solar');
 var wind = require('./wind');
 var user = require('./user');
@@ -27,6 +28,10 @@ mongoose.connect(process.env.MONGOHQ_URL);
 var router = express.Router();
 router.use(bodyParser.json());
 router.use(ensureAuthorized);
+
+
+// Location
+router.get('/location', location.findByCoords);
 
 
 // Solar and Wind

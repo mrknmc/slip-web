@@ -1,5 +1,8 @@
 var Backbone = require('backbone');
+var _ = require('lodash');
 var moment = require('moment');
+var util = require('../util');
+
 
 module.exports = Backbone.Model.extend({
   defaults: function() {
@@ -10,9 +13,6 @@ module.exports = Backbone.Model.extend({
       },
       xAxis: {
         type: 'datetime',
-        // title: {
-        //   text: 'Date',
-        // },
       },
       plotOptions: {
         areaspline: {
@@ -36,8 +36,8 @@ module.exports = Backbone.Model.extend({
   },
 
   initialize: function() {
-    var measurements = this.get('measurements');
-    var end = moment(measurements[measurements.length - 1].timestamp, 'X');
+    var msrments = this.get('wind');
+    var end = moment(msrments[msrments.length - 1].timestamp, 'X');
     this.set('filter', {
       end: end,
       start: moment(end).add(-7, 'days'),
@@ -48,9 +48,13 @@ module.exports = Backbone.Model.extend({
     return {text: this.get('_id') + ': Wind Speed'};
   },
 
+  intensities: function() {
+    return [1,2,3,4,5,6,7,8];
+  },
+
   getData: function() {
     var filter = this.get('filter');
-    return _.chain(this.get('measurements'))
+    return _.chain(this.get('wind'))
       .map(function (msrment) {
         return {
           // convert to millis

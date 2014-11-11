@@ -1,4 +1,5 @@
 import time
+import json
 import random
 
 DIODE_COUNT = 24
@@ -10,26 +11,34 @@ def days_to_secs(days):
 
 def main(days=7, freq=3600):
 
-    template = """{{
-    "windSpeed": {wind_speed},
-    "lightIntensities": {light_intensities},
-    "timestamp": {timestamp},
-    "windDirection": 2
-}},"""
-
     timestamp = time.time() - days_to_secs(days + 1)
 
+    solars = []
+    winds = []
+
     # for x days
-    for i in xrange(days_to_secs(days) / freq):
+    for i in range(days_to_secs(days) / freq):
         # every y seconds
         timestamp = timestamp + freq
-        d = {
-            'wind_speed': random.gauss(40, 3),
-            'light_intensities': [int(random.gauss(100, 20)) for i in xrange(DIODE_COUNT)],
-            'timestamp': timestamp,
-        }
 
-        print(template.format(**d))
+        solars.append({
+            'timestamp': timestamp,
+            'values': [int(random.gauss(60, 20)) for i in range(DIODE_COUNT)],
+        })
+
+        winds.append({
+            'timestamp': timestamp,
+            'windSpeed': random.gauss(40, 3),
+            'windDirection': 2
+        })
+
+    print(json.dumps({
+        'solar': solars,
+        'wind': winds,
+        'deviceId': 'Prospeckz_A',
+        'xCoord': 55.9465002,
+        'yCoord': -3.2031142,
+    }))
 
 
 if __name__ == '__main__':

@@ -1,19 +1,22 @@
-var Measurement = require('./models').Measurement;
+var Upload = require('./models').Upload;
 var handleError = require('./util').handleError;
 
+
 exports.findAll = function (req, res) {
-  Measurement
-    .aggregate()
-    // unwind the measurements
-    .unwind('measurements')
-    // group by deviceId
-    .group({
-      _id: '$deviceId',
-      measurements: {$push: '$measurements'}
-    })
-    // only return lightIntensity and timestamp
-    .project('measurements.windSpeed measurements.windDirection measurements.timestamp')
-    .exec(function(err, objs) {
+  Upload.aggregate([
+    {
+      $project: {
+        wind: 1,
+        deviceId: 1,
+      }
+    },
+    { $unwind: '$wind' },
+    { $group: {
+        _id: '$deviceId',
+        wind: { $push: '$wind' }
+      }
+    }
+  ], function(err, objs) {
       if (err) {
         handleError(err, res);
       } else {

@@ -47,7 +47,7 @@ app.get('/', function(req, res) {
 });
 
 
-app.get(['/solar', '/wind', '/uploads', '/map', '/users'], function(req, res) {
+app.get(['/solar', '/wind', '/uploads', '/devices', '/users'], function(req, res) {
   if (req.isAuthenticated()) {
     res.render('dashboard', {username: req.user.name});
   } else {

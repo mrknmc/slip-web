@@ -3,7 +3,7 @@ var Upload = require('../models/upload');
 
 var Uploads = Backbone.Collection.extend({
   model: Upload,
-  url: '/api/measurements',
+  url: '/api/upload',
 
   comparator: function (a, b) {
     if (a.get('created') > b.get('created')) {
