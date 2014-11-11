@@ -36,7 +36,8 @@
     "passport": "^0.2.1",
     "passport-google-oauth": "^0.1.5",
     "pikaday": "^1.2.0",
-    "redis": "^0.12.1"
+    "redis": "^0.12.1",
+    "request": "^2.47.0"
   },
   "engines": {
     "node": "0.10.x"
