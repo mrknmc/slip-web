@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 var ChartView = require('./chartView');
+var PolarChartView = require('./polarChartView');
 
 module.exports = Backbone.View.extend({
 
@@ -10,6 +11,8 @@ module.exports = Backbone.View.extend({
 
   addOne: function(model) {
     var view = new ChartView({'model': model});
+    this.$el.append(view.render().el);
+    view = new PolarChartView({'model': model});
     this.$el.append(view.render().el);
   },
 

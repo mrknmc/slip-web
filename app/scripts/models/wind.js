@@ -1,5 +1,8 @@
 var Backbone = require('backbone');
+var _ = require('lodash');
 var moment = require('moment');
+var util = require('../util');
+
 
 module.exports = Backbone.Model.extend({
   defaults: function() {
@@ -44,6 +47,24 @@ module.exports = Backbone.Model.extend({
   title: function() {
     return {text: this.get('_id') + ': Wind Speed'};
   },
+
+  intensities: function() {
+    return [1,2,3,4,5,6,7,8];
+  },
+    // return _.map(this.get('measurements'), function(msrment) {
+    //   var inRing = util.innerRing(msrment);
+    //   var midRing = util.middleRing(msrment);
+    //   var outRing = util.outerRing(msrment);
+    //   return _.chain()
+    //     .zip(inRing, midRing, outRing)
+    //     .map(function(vals) {
+    //       return _.reduce(vals, function(sum, num) {
+    //         return sum + num;
+    //       });
+    //     })
+    //     .value();
+    // });
+  // },
 
   getData: function() {
     var filter = this.get('filter');

@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('lodash');
 var moment = require('moment');
 var util = require('../util');
 
@@ -47,10 +48,31 @@ module.exports = Backbone.Model.extend({
     return {text: this.get('_id') + ': Solar Power'};
   },
 
+  intensities: function() {
+    var msrments = this.get('measurements');
+    return _.map(msrments, function(m) {
+      var inRing = util.innerRing(m);
+      var midRing = util.middleRing(m);
+      var outRing = util.outerRing(m);
+      return _.zip(inRing, midRing, outRing)
+        .map(function(vals) {
+          // computes sum
+          return _.reduce(vals, function(sum, num) {
+            return sum + num;
+          });
+      });
+    }).reduce(function(result, vec, key) {
+      for (var i = vec.length - 1; i >= 0; i--) {
+        result[i] += vec[i];
+      }
+      return result;
+    });
+  },
+
   getData: function() {
     // have some sensible filter defaults
     var filter = this.get('filter');
-    return _.chain(this.get('measurements'))
+    return _(this.get('measurements'))
       .map(function (msrment) {
         return {
           // convert to millis
