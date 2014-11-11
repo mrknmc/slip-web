@@ -3,18 +3,20 @@ var handleError = require('./util').handleError;
 
 
 exports.findAll = function (req, res) {
-  Upload
-    .aggregate()
-    // unwind the measurements
-    .unwind('measurements')
-    // group by deviceId
-    .group({
-      _id: '$deviceId',
-      measurements: {$push: '$measurements'}
-    })
-    // only return lightIntensity and timestamp
-    .project('measurements.lightIntensities measurements.timestamp')
-    .exec(function(err, objs) {
+  Upload.aggregate([
+    {
+      $project: {
+        solar: 1,
+        deviceId: 1,
+      }
+    },
+    { $unwind: '$solar' },
+    { $group: {
+        _id: '$deviceId',
+        solar: { $push: '$solar' }
+      }
+    }
+  ], function(err, objs) {
       if (err) {
         handleError(err, res);
       } else {

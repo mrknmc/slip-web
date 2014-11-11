@@ -2,22 +2,22 @@ var _ = require('lodash');
 
 
 function innerRing(msrment) {
-  return _.first(msrment.lightIntensities, 8);
+  return _.first(msrment.values, 8);
 }
 
 
 function middleRing(msrment) {
-  return _(msrment.lightIntensities).rest(8).first(8).value();
+  return _(msrment.values).rest(8).first(8).value();
 }
 
 
 function outerRing(msrment) {
-  return _(msrment.lightIntensities).rest(16).first(8).value();
+  return _(msrment.values).rest(16).first(8).value();
 }
 
 
 function intensitySum(msrment) {
-  return _.reduce(msrment.lightIntensities, function(sum, num) {
+  return _.reduce(msrment.values, function(sum, num) {
     return sum + num;
   });
 }
@@ -26,7 +26,7 @@ function intensitySum(msrment) {
 function intensityAngle(msrment) {
   // there are as many sectors as there are intensities
   // when length is 8, every sector is pi/4
-  var intensities = msrment.lightIntensities;
+  var intensities = msrment.values;
   var sectorAngle = Math.PI * 2 / intensities.length;
   var angle;
   var vectors = _.map(intensities, function(intensity, idx) {

@@ -7,9 +7,12 @@ var uploadSchema = new mongoose.Schema({
   xCoord: Number,
   yCoord: Number,
   created: Date,
-  measurements: [{
+  solar: [{
     timestamp: Number,
-    lightIntensities: [Number],
+    values: [Number],
+  }],
+  wind: [{
+    timestamp: Number,
     windDirection: Number,
     windSpeed: Number,
   }],

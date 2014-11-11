@@ -36,8 +36,8 @@ module.exports = Backbone.Model.extend({
   },
 
   initialize: function() {
-    var measurements = this.get('measurements');
-    var end = moment(measurements[measurements.length - 1].timestamp, 'X');
+    var msrments = this.get('solar');
+    var end = moment(msrments[msrments.length - 1].timestamp, 'X');
     this.set('filter', {
       end: end,
       start: moment(end).add(-7, 'days'),
@@ -49,7 +49,7 @@ module.exports = Backbone.Model.extend({
   },
 
   intensities: function() {
-    var msrments = this.get('measurements');
+    var msrments = this.get('solar');
     return _.map(msrments, function(m) {
       var inRing = util.innerRing(m);
       var midRing = util.middleRing(m);
@@ -72,15 +72,15 @@ module.exports = Backbone.Model.extend({
   getData: function() {
     // have some sensible filter defaults
     var filter = this.get('filter');
-    return _(this.get('measurements'))
-      .map(function (msrment) {
+    return _(this.get('solar'))
+      .map(function (m) {
         return {
           // convert to millis
-          x: moment(msrment.timestamp, 'X'),
-          y: util.intensitySum(msrment),
+          x: moment(m.timestamp, 'X'),
+          y: util.intensitySum(m),
         };
-      }).filter(function (msrment) {
-        return msrment.x >= filter.start && msrment.x < moment(filter.end).add(1, 'days');
+      }).filter(function (m) {
+        return m.x >= filter.start && m.x < moment(filter.end).add(1, 'days');
     }).value();
   },
 
