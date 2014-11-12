@@ -57,7 +57,10 @@ exports.addUpload = function(req, res) {
 
   location.getLocation(upload.xCoord, upload.yCoord, function(err, loc) {
     if (loc) {
-      upload = _.extend(upload, {location: location.prettyLocation(loc)});
+      var prettyLoc = location.prettyLocation(loc);
+      if (prettyLoc) {
+        upload = _.extend(upload, {location: prettyLoc});
+      }
     }
     Upload.create(upload, function(err, upload) {
       if (err) {

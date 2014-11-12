@@ -50,29 +50,37 @@ module.exports = Backbone.Model.extend({
 
   intensities: function() {
     var msrments = this.get('solar');
-    return _.map(msrments, function(m) {
-      var inRing = util.innerRing(m);
-      var midRing = util.middleRing(m);
-      var outRing = util.outerRing(m);
-      return _.zip(inRing, midRing, outRing)
-        .map(function(vals) {
-          // computes sum
-          return _.reduce(vals, function(sum, num) {
-            return sum + num;
-          });
-      });
-    }).reduce(function(result, vec, key) {
-      for (var i = vec.length - 1; i >= 0; i--) {
-        result[i] += vec[i];
-      }
-      return result;
+    var filter = this.get('filter');
+    var timestamp;
+    return _(msrments)
+      .filter(function(m) {
+        timestamp = moment(m.timestamp, 'X');
+        return timestamp >= filter.start && timestamp < moment(filter.end).add(1, 'days');
+      })
+      .map(function(m) {
+        var inRing = util.innerRing(m);
+        var midRing = util.middleRing(m);
+        var outRing = util.outerRing(m);
+        return _.zip(inRing, midRing, outRing)
+          .map(function(vals) {
+            // computes sum
+            return _.reduce(vals, function(sum, num) {
+              return sum + num;
+            });
+        });
+      }).reduce(function(result, vec, key) {
+        for (var i = vec.length - 1; i >= 0; i--) {
+          result[i] += vec[i];
+        }
+        return result;
     });
   },
 
   getData: function() {
     // have some sensible filter defaults
     var filter = this.get('filter');
-    return _(this.get('solar'))
+    var solar = this.get('solar');
+    return _(solar)
       .map(function (m) {
         return {
           // convert to millis

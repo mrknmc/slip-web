@@ -15,8 +15,13 @@ exports.findByCoords = function(req, res) {
 
 
 exports.prettyLocation = function(data) {
-  var loc = data.results[0].locations[0];
-  return loc.street + ', ' + loc.adminArea5 + ', ' + loc.adminArea3;
+  if (data.results.length > 0) {
+    if (data.results[0].locations.length > 0) {
+      var loc = data.results[0].locations[0];
+      return loc.street + ', ' + loc.adminArea5 + ', ' + loc.adminArea3;
+    }
+  }
+  return null;
 };
 
 
