@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var router = require('../routers/router');
 var measurements = require('../collections/measurements');
 var UploadsView = require('./uploadsView');
+var DevicesView = require('./devicesView');
 var UsersView = require('./usersView');
 var ChartsView = require('./chartsView');
 
@@ -16,6 +17,7 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     new UploadsView();
     new UsersView();
+    new DevicesView();
     new ChartsView({el: '#solar .charts', collection: measurements.solar});
     new ChartsView({el: '#wind .charts', collection: measurements.wind});
   },

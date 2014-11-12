@@ -7,6 +7,7 @@ var User = require('./models').User;
 var handleError = require('./util').handleError;
 var redisClient = require('./redisClient');
 var location = require('./location');
+var device = require('./device');
 var solar = require('./solar');
 var wind = require('./wind');
 var user = require('./user');
@@ -32,6 +33,10 @@ router.use(ensureAuthorized);
 
 // Location
 router.get('/location', location.findByCoords);
+
+
+// Devices
+router.get('/device', device.findAll);
 
 
 // Solar and Wind

@@ -7,11 +7,8 @@ var handleErrors = require('../util/handleErrors');
 
 
 gulp.task('scripts', function () {
-  var bundler = watchify(browserify('./app/scripts/app.js', {
-    cache: {},
-    packageCache: {},
-    fullPaths: true,
-  }));
+  // TODO: remove watchify args from final build
+  var bundler = watchify(browserify('./app/scripts/app.js', watchify.args));
 
   // Ignore moment from Pikaday
   bundler.ignore('moment');
