@@ -32,7 +32,7 @@ function getLocation(xCoord, yCoord, callback) {
           json: true,
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            if (prettyLocation(data)) {
+            if (prettyLocation(body)) {
               // if pretty location exists store body
               redisClient.setex(coords, ONE_DAY, JSON.stringify(body));
               callback(null, body);
