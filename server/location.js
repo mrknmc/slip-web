@@ -38,8 +38,10 @@ function getLocation(xCoord, yCoord, callback) {
               callback(null, body);
             } else {
               // otherwise print error
-              if (body.messages.length > 0) {
-                callback(new Error(body.messages[0]), null);
+              if (body.messages) {
+                if (body.messages.length > 0) {
+                  callback(new Error(body.messages[0]), null);
+                }
               } else {
                 callback(new Error('Unspecified MapQuest Error.'), null);
               }
