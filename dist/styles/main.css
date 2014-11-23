@@ -95,8 +95,14 @@ h1 .fa-map-marker,
 }
 
 .jumbotron {
-  background-image: url("/images/graphy.png");
+  padding-top: 128px;
+  height: 565px;
+  background-image: url("/images/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
   color: #fff;
+  text-align: center;
 }
 
 .navbar {
@@ -123,4 +129,8 @@ h1 .fa-map-marker,
   margin: 30px auto;
   padding: 30px 0;
   border-bottom: 1px solid #ebebeb;
+}
+
+.panel-borderless {
+  border: 0;
 }
