@@ -37,6 +37,7 @@ router.get('/location', location.findByCoords);
 
 // Devices
 router.get('/device', device.findAll);
+// router.get('/report', device.report);
 
 
 // Solar and Wind

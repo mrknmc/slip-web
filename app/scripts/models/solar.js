@@ -5,6 +5,8 @@ var util = require('../util');
 
 
 module.exports = Backbone.Model.extend({
+  idAttribute: '_id',
+
   defaults: function() {
     return {
       color: '#ff8c00',
@@ -53,10 +55,12 @@ module.exports = Backbone.Model.extend({
     var filter = this.get('filter');
     var timestamp;
     return _(msrments)
+      // only take ones within filter
       .filter(function(m) {
         timestamp = moment(m.timestamp, 'X');
         return timestamp >= filter.start && timestamp < moment(filter.end).add(1, 'days');
       })
+      // map over rings
       .map(function(m) {
         var inRing = util.innerRing(m);
         var midRing = util.middleRing(m);

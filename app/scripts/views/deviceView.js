@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
   tagName: 'a',
-  className: 'list-group-item',
+  className: 'list-group-item report',
 
   // Cache the template function for a single item.
   template: _.template($('#device-template').html()),
@@ -12,8 +12,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function () {
-    console.log(this.model.toJSON());
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model.toDisplay()));
     return this;
   },
 });

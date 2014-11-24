@@ -19,9 +19,33 @@ script(type='text/template', id='user-template')
   p.list-group-item-text <%- email %>
 
 script(type='text/template', id='device-template')
-  h4.list-group-item-heading <%- deviceId %>
-  p.list-group-item-text Blah
-  //- p.list-group-item-text <%- email %>
+  h3.list-group-item-heading <%- _id %>
+  h4.list-group-item-heading.solar Solar Power
+  dl.dl-horizontal
+    dt Measured Since
+    dd <%- minSolarDate %>
+    dt Measured Until
+    dd <%- maxSolarDate %>
+    dt Total Energy Collected
+    dd <%- solarSum %> W/m2
+    dt Most optimal orientation
+    dd <%- bestSolarOrientation %>
+  h4.list-group-item-heading.wind Wind Power
+  dl.dl-horizontal
+    dt Measured Since
+    dd <%- minWindDate %>
+    dt Measured Until
+    dd <%- maxWindDate %>
+    dt Total Wind Speed
+    dd <%- windSpeedSum %> m/s
+    dt Most optimal orientation
+    dd <%- bestWindOrientation %>
+  //- h4.list-group-item-heading.wind Recorded Locations
+    //- dt Coords
+    //- dd <%- coords %>
+
+//- script(type='text/template', id='map-template')
+//-   .map
 
 script(type='text/template', id='chart-template')
   .panel.panel-default

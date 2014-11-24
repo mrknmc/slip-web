@@ -65,6 +65,10 @@ h1 .fa-map-marker,
   margin-right: 15px;
 }
 
+.page-header {
+  border-bottom: 0;
+}
+
 .charts .panel-heading {
   background-color: #f1f6fc;
 }
@@ -133,4 +137,17 @@ h1 .fa-map-marker,
 
 .panel-borderless {
   border: 0;
+}
+
+@media (min-width: 768px) {
+  .dl-horizontal dd {
+    margin-left: 200px;
+  }
+
+  .dl-horizontal dt {
+    width: 180px;
+  }
+}
+.report h3 {
+  text-align: center;
 }

@@ -23,6 +23,67 @@ function intensitySum(msrment) {
 }
 
 
+/**
+* Returns measurement with the minimum timestamp
+*/
+function maxTimestamp(msrments) {
+  return _.max(msrments, function(msrment) {
+    return msrment.timestamp;
+  });
+}
+
+
+/**
+* Returns measurement with the minimum timestamp
+*/
+function minTimestamp(msrments) {
+  return _.min(msrments, function(msrment) {
+    return msrment.timestamp;
+  });
+}
+
+
+/**
+* Computes windSpeeds into a vector of 8 directions.
+*/
+function windSpeeds(msrments) {
+  return _.reduce(msrments, function(result, m, key) {
+    // TODO: remove this if statement after receiving normal data
+    if (m.windDirection < 8) {
+      result[m.windDirection] += m.windSpeed;
+    }
+    return result;
+  }, [0, 0, 0, 0, 0, 0, 0, 0]);
+}
+
+
+/**
+* Computes intensities into a vector of 8 directions.
+*/
+function intensities(msrments) {
+  return _(msrments)
+    // map over rings
+    .map(function(m) {
+      var inRing = innerRing(m);
+      var midRing = middleRing(m);
+      var outRing = outerRing(m);
+      return _.zip(inRing, midRing, outRing)
+        .map(function(vals) {
+          // computes sum
+          // TODO: maybe use max, not sure if sum make sense for summing watt/m^2
+          return _.reduce(vals, function(sum, num) {
+            return sum + num;
+          });
+      });
+    }).reduce(function(result, vec, key) {
+      for (var i = vec.length - 1; i >= 0; i--) {
+        result[i] += vec[i];
+      }
+      return result;
+  });
+}
+
+
 function intensityAngle(msrment) {
   // there are as many sectors as there are intensities
   // when length is 8, every sector is pi/4
@@ -50,3 +111,8 @@ exports.middleRing = middleRing;
 exports.outerRing = outerRing;
 exports.intensitySum = intensitySum;
 exports.intensityAngle = intensityAngle;
+exports.intensities = intensities;
+exports.windSpeeds = windSpeeds;
+exports.orientations = ['North', 'North East', 'East', 'South East', 'South', 'South West', 'West', 'North West'];
+exports.maxTimestamp = maxTimestamp;
+exports.minTimestamp = minTimestamp;

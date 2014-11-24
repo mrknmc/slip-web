@@ -5,6 +5,8 @@ var util = require('../util');
 
 
 module.exports = Backbone.Model.extend({
+  idAttribute: '_id',
+
   defaults: function() {
     return {
       color: '#87cefa',
@@ -49,7 +51,7 @@ module.exports = Backbone.Model.extend({
   },
 
   intensities: function() {
-    return [1,2,3,4,5,6,7,8];
+    return util.windSpeeds(this.get('wind'));
   },
 
   getData: function() {
