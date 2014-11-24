@@ -47,13 +47,20 @@ function minTimestamp(msrments) {
 * Computes windSpeeds into a vector of 8 directions.
 */
 function windSpeeds(msrments) {
-  return _.reduce(msrments, function(result, m, key) {
+  var total = _.reduce(msrments, function(total, m, key) {
     // TODO: remove this if statement after receiving normal data
     if (m.windDirection < 8) {
-      result[m.windDirection] += m.windSpeed;
+      total.result[m.windDirection] += m.windSpeed;
     }
-    return result;
-  }, [0, 0, 0, 0, 0, 0, 0, 0]);
+    total.count += 1;
+    return total;
+  }, {
+    result: [0, 0, 0, 0, 0, 0, 0, 0],
+    count: 0,
+  });
+  return _.map(total.result, function(res) {
+    return res / total.count;
+  });
 }
 
 
@@ -61,7 +68,7 @@ function windSpeeds(msrments) {
 * Computes intensities into a vector of 8 directions.
 */
 function intensities(msrments) {
-  return _(msrments)
+  var total = _(msrments)
     // map over rings
     .map(function(m) {
       var inRing = innerRing(m);
@@ -70,17 +77,22 @@ function intensities(msrments) {
       return _.zip(inRing, midRing, outRing)
         .map(function(vals) {
           // computes sum
-          // TODO: maybe use max, not sure if sum make sense for summing watt/m^2
-          return _.reduce(vals, function(sum, num) {
-            return sum + num;
-          });
+          return _.max(vals);
       });
-    }).reduce(function(result, vec, key) {
+    // sum across all directions
+    }).reduce(function(total, vec, key) {
       for (var i = vec.length - 1; i >= 0; i--) {
-        result[i] += vec[i];
+        total.result[i] += vec[i];
       }
-      return result;
-  });
+      total.count += 1;
+      return total;
+    }, {
+      result: [0, 0, 0, 0, 0, 0, 0, 0],
+      count: 0,
+    });
+    return _.map(total.result, function(res) {
+      return res / total.count;
+    });
 }
 
 

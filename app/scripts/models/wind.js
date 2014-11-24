@@ -12,6 +12,11 @@ module.exports = Backbone.Model.extend({
       color: '#87cefa',
       yAxis: {
         title: 'Wind Speed',
+        labels: {
+          formatter: function () {
+            return this.value + ' m/s';
+          }
+        }
       },
       xAxis: {
         type: 'datetime',

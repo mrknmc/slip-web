@@ -12,6 +12,11 @@ module.exports = Backbone.Model.extend({
       color: '#ff8c00',
       yAxis: {
         title: 'Light Intensity',
+        labels: {
+          formatter: function () {
+            return this.value + ' W/m\xB2';
+          }
+        }
       },
       xAxis: {
         type: 'datetime',
@@ -51,33 +56,7 @@ module.exports = Backbone.Model.extend({
   },
 
   intensities: function() {
-    var msrments = this.get('solar');
-    var filter = this.get('filter');
-    var timestamp;
-    return _(msrments)
-      // only take ones within filter
-      .filter(function(m) {
-        timestamp = moment(m.timestamp, 'X');
-        return timestamp >= filter.start && timestamp < moment(filter.end).add(1, 'days');
-      })
-      // map over rings
-      .map(function(m) {
-        var inRing = util.innerRing(m);
-        var midRing = util.middleRing(m);
-        var outRing = util.outerRing(m);
-        return _.zip(inRing, midRing, outRing)
-          .map(function(vals) {
-            // computes sum
-            return _.reduce(vals, function(sum, num) {
-              return sum + num;
-            });
-        });
-      }).reduce(function(result, vec, key) {
-        for (var i = vec.length - 1; i >= 0; i--) {
-          result[i] += vec[i];
-        }
-        return result;
-    });
+    return util.intensities(this.get('solar'));
   },
 
   getData: function() {
@@ -89,7 +68,7 @@ module.exports = Backbone.Model.extend({
         return {
           // convert to millis
           x: moment(m.timestamp, 'X'),
-          y: util.intensitySum(m),
+          y: _.max(m.values),
         };
       }).filter(function (m) {
         return m.x >= filter.start && m.x < moment(filter.end).add(1, 'days');

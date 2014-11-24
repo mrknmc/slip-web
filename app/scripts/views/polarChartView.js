@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
         color: model.get('color'),
         name: model.get('_id'),
         // data: [1,2,3,4,5,6,7,8],
-        data: model.intensities()
+        data: model.intensities(),
       }]
     });
     // this.chart = this.$panelBody.highcharts();
