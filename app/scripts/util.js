@@ -47,18 +47,21 @@ function minTimestamp(msrments) {
 * Computes windSpeeds into a vector of 8 directions.
 */
 function windSpeeds(msrments) {
-  var total = _.reduce(msrments, function(total, m, key) {
-    // TODO: remove this if statement after receiving normal data
-    total.result[m.windDirection] += m.windSpeed;
-    total.count[m.windDirection] += 1;
-    return total;
-  }, {
-    result: new Array(360),
-    count: new Array(360),
+
+  var results = [0, 0, 0, 0, 0, 0, 0, 0];
+  var counts = [0, 0, 0, 0, 0, 0, 0, 0];
+
+  _.forEach(msrments, function(m) {
+    results[m.windDirection] += m.windSpeed;
+    counts[m.windDirection] += 1;
   });
+
   // average wind speeds in each direction
-  return _.map(total.result, function(res, idx) {
-    return res / total.count[idx];
+  return _.map(results, function(res, idx) {
+    if (res === 0) {
+      return 0;
+    }
+    return res / counts[idx];
   });
 }
 
