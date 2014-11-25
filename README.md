@@ -1,2 +1,3 @@
-slip-web
+WindSol Web Frontend & Backend
 ========
+
