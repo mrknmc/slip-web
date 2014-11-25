@@ -26,9 +26,9 @@ script(type='text/template', id='device-template')
     dd <%- minSolarDate %>
     dt Measured Until
     dd <%- maxSolarDate %>
-    dt Total Energy Collected
+    dt Average Energy Collected
     dd <%- solarSum %> W/m&sup2;
-    dt Most optimal orientation
+    dt Most Optimal Orientation
     dd <%- bestSolarOrientation %>
   h4.list-group-item-heading.wind Wind Power
   dl.dl-horizontal
@@ -36,9 +36,9 @@ script(type='text/template', id='device-template')
     dd <%- minWindDate %>
     dt Measured Until
     dd <%- maxWindDate %>
-    dt Total Wind Speed
+    dt Average Wind Speed
     dd <%- windSpeedSum %> m/s
-    dt Most optimal orientation
+    dt Most Optimal Orientation
     dd <%- bestWindOrientation %>
   //- h4.list-group-item-heading.wind Recorded Locations
     //- dt Coords
