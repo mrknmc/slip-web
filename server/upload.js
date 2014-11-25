@@ -55,11 +55,24 @@ exports.addUpload = function(req, res) {
     .extend({user: req.user._id, created: Date.now()})
     .value();
 
+  upload.solar = _.map(upload.solar, function(solar) {
+    solar.values = _.map(solar.values, function(val) {
+      return val * (1362 / 31);
+    });
+    return solar;
+  });
+
+  upload.wind = _.map(upload.wind, function(wind) {
+    // 360/8 = 45
+    wind.windDirection = Math.round(wind.windDirection / 45);
+    return wind;
+  });
+
   location.getLocation(upload.xCoord, upload.yCoord, function(err, loc) {
     if (loc) {
       var prettyLoc = location.prettyLocation(loc);
       if (prettyLoc) {
-        upload = _.extend(upload, {location: prettyLoc});
+        upload = _.extend(upload, {'location': prettyLoc});
       }
     }
     Upload.create(upload, function(err, upload) {
