@@ -30,7 +30,7 @@ module.exports = Backbone.View.extend({
         endAngle: 360
       },
       xAxis: {
-        tickInterval: 45,
+        tickInterval: model.tickInterval(),
         min: 0,
         max: 360,
         labels: {

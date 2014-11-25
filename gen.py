@@ -23,13 +23,13 @@ def main(days=7, freq=3600):
 
         solars.append({
             'timestamp': timestamp,
-            'values': [int(random.gauss(60, 20)) for i in range(DIODE_COUNT)],
+            'values': [int(random.gauss(15, 5)) for i in range(DIODE_COUNT)],
         })
 
         winds.append({
             'timestamp': timestamp,
             'windSpeed': random.gauss(40, 3),
-            'windDirection': 2
+            'windDirection': random.choice(range(360)),
         })
 
     print(json.dumps({

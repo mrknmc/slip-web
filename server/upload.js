@@ -62,11 +62,11 @@ exports.addUpload = function(req, res) {
     return solar;
   });
 
-  upload.wind = _.map(upload.wind, function(wind) {
-    // 360/8 = 45
-    wind.windDirection = Math.round(wind.windDirection / 45);
-    return wind;
-  });
+  // upload.wind = _.map(upload.wind, function(wind) {
+  //   // 360/8 = 45
+  //   wind.windDirection = Math.round(wind.windDirection / 45);
+  //   return wind;
+  // });
 
   location.getLocation(upload.xCoord, upload.yCoord, function(err, loc) {
     if (loc) {
