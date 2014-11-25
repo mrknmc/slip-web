@@ -49,17 +49,16 @@ function minTimestamp(msrments) {
 function windSpeeds(msrments) {
   var total = _.reduce(msrments, function(total, m, key) {
     // TODO: remove this if statement after receiving normal data
-    if (m.windDirection < 8) {
-      total.result[m.windDirection] += m.windSpeed;
-    }
-    total.count += 1;
+    total.result[m.windDirection] += m.windSpeed;
+    total.count[m.windDirection] += 1;
     return total;
   }, {
-    result: [0, 0, 0, 0, 0, 0, 0, 0],
-    count: 0,
+    result: new Array(360),
+    count: new Array(360),
   });
-  return _.map(total.result, function(res) {
-    return res / total.count;
+  // average wind speeds in each direction
+  return _.map(total.result, function(res, idx) {
+    return res / total.count[idx];
   });
 }
 
