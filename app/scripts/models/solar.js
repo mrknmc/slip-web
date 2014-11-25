@@ -42,6 +42,10 @@ module.exports = Backbone.Model.extend({
     };
   },
 
+  tickInterval: function()  {
+    return 45;
+  },
+
   initialize: function() {
     var msrments = this.get('solar');
     var end = moment(msrments[msrments.length - 1].timestamp, 'X');
