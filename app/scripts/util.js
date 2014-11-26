@@ -50,21 +50,24 @@ function minTimestamp(msrments) {
 * Computes windSpeeds into a vector of 8 directions.
 */
 function windSpeeds(msrments) {
-
-  var results = [0, 0, 0, 0, 0, 0, 0, 0];
-  var counts = [0, 0, 0, 0, 0, 0, 0, 0];
-
-  _.forEach(msrments, function(m) {
-    results[m.windDirection] += m.windSpeed;
-    counts[m.windDirection] += 1;
+  var total = _.reduce(msrments, function(total, m, key) {
+    // TODO: remove this if statement after receiving normal data
+    if (m.windDirection < 8) {
+    total.result[m.windDirection] += m.windSpeed;
+    total.count[m.windDirection] += 1;
+    } else {
+      console.log(m.windDirection);
+    }
+    return total;
+  }, {
+    result: [0, 0, 0, 0, 0, 0, 0, 0],
+    count: [0, 0, 0, 0, 0, 0, 0, 0],
   });
-
-  // average wind speeds in each direction
-  return _.map(results, function(res, idx) {
+  return _.map(total.result, function(res, idx) {
     if (res === 0) {
       return 0;
     }
-    return res / counts[idx];
+    return res / total.count[idx];
   });
 }
 

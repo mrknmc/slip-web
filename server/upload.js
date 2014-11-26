@@ -70,7 +70,7 @@ exports.addUpload = function(req, res) {
 
   upload.wind = _.map(upload.wind, function(wind) {
     // 360/8 = 45
-    wind.windDirection = Math.round(wind.windDirection / 45);
+    wind.windDirection = Math.round(wind.windDirection / 45) % 8;
     return wind;
   });
 
