@@ -6,7 +6,9 @@ nav.navbar.navbar-default(role='navigation')
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      span.navbar-brand WindSol
+      span.navbar-brand
+        i.fa.fa-cloud.fa-fw
+        |  WindSol
     #menu.collapse.navbar-collapse
       if username
         ul.nav.navbar-nav(role='tablist')
@@ -24,7 +26,7 @@ nav.navbar.navbar-default(role='navigation')
               | Wind Power
           li.devices
             a(href='#devices', role='tab', data-url='/devices', data-toggle='tab')
-              i.fa.fa-map-marker.fa-fw.fa-lg
+              i.fa.fa-rocket.fa-fw.fa-lg
               | Devices
           li.users
             a(href='#users', role='tab', data-url='/users', data-toggle='tab')
