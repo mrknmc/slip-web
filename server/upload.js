@@ -56,7 +56,13 @@ exports.addUpload = function(req, res) {
     .value();
 
   upload.solar = _.map(upload.solar, function(solar) {
-    solar.values = _.map(solar.values, function(val) {
+    var first = solar.values[0];
+    var first2 = solar.values[8];
+    var first3 = solar.values[16];
+    var solarVals = [first].concat(solar.values.slice(1, 8).reverse())
+      .concat([first2]).concat(solar.values.slice(9, 16).reverse())
+      .concat([first3]).concat(solar.values.slice(17, 24).reverse());
+    solar.values = _.map(solarVals, function(val) {
       return val * (1362 / 31);
     });
     return solar;

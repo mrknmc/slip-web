@@ -2,16 +2,19 @@ var _ = require('lodash');
 
 
 function innerRing(msrment) {
+  // takes first 8 values
   return _.first(msrment.values, 8);
 }
 
 
 function middleRing(msrment) {
+  // takes values 8-16
   return _(msrment.values).rest(8).first(8).value();
 }
 
 
 function outerRing(msrment) {
+  // takes values 16-24
   return _(msrment.values).rest(16).first(8).value();
 }
 
