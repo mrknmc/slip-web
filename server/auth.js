@@ -31,7 +31,7 @@ passport.use(new GoogleStrategy({
         {email: profile.emails[0].value}
       ]},
       // update email if not present yet
-      {email: profile.emails[0].value},
+      {email: profile.emails[0].value, oauthID: profile.id},
       function(err, user) {
       if (err) {
         // Probably let the user know he can't login
