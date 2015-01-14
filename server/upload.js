@@ -63,7 +63,7 @@ exports.addUpload = function(req, res) {
       .concat([first2]).concat(solar.values.slice(9, 16).reverse())
       .concat([first3]).concat(solar.values.slice(17, 24).reverse());
     solar.values = _.map(solarVals, function(val) {
-      return val * (1362 / 31);
+      return val * (240 / 31);
     });
     return solar;
   });
