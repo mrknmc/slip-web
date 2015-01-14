@@ -79,7 +79,6 @@ module.exports = Backbone.View.extend({
       return new Device(_.assign(deviceAttrs, { '_id': deviceId }));
     });
     devices = new Devices(devices);
-    console.log(devices);
     this.addAll(devices);
   },
 

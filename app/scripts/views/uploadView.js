@@ -5,6 +5,7 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click a.delete': 'delete',
+    'click a.map': 'map',
   },
 
   // Cache the template function for a single item.
@@ -17,6 +18,10 @@ module.exports = Backbone.View.extend({
 
   delete: function(e) {
     this.model.destroy();
+  },
+
+  map: function(e) {
+    this.model.trigger('mapped', this.model);
   },
 
   render: function () {

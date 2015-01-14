@@ -2,7 +2,9 @@ script(type='text/template', id='upload-template')
   td <%- user.name %>
   td <%- user.email %>
   td <%- deviceId %>
-  td <%- location %>
+  //- td
+  //-   a.map(data-toggle='modal', data-target='#map-modal') <%- xCoord %>, <%- yCoord %>
+  //- td <%- location %>
   td <%- created %>
   td
     .btn-group
@@ -11,6 +13,8 @@ script(type='text/template', id='upload-template')
       | </a>
       a.btn.btn-default.delete
         i.fa.fa-remove.fa-lg
+      a.btn.btn-default.map(data-toggle='modal', data-target='#map-modal')
+        i.fa.fa-map-marker.fa-lg
 
 script(type='text/template', id='user-template')
   a.delete.pull-right.btn
@@ -44,8 +48,12 @@ script(type='text/template', id='device-template')
     //- dt Coords
     //- dd <%- coords %>
 
-//- script(type='text/template', id='map-template')
-//-   .map
+script(type='text/template', id='map-template')
+  #map-modal.modal.fade
+    .modal-dialog.modal-lg
+      .modal-content
+        #map.modal-body
+
 
 script(type='text/template', id='chart-template')
   .panel.panel-default
