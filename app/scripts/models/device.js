@@ -37,10 +37,20 @@ module.exports = Backbone.Model.extend({
     });
   },
 
+  solarAvg: function() {
+    var solarSum = this.solarSum();
+    return solarSum / this.get('solarTotal').length;
+  },
+
   windSpeedSum: function() {
     return _.reduce(this.get('windSpeedTotal'), function(sum, num) {
       return sum + num;
     });
+  },
+
+  windSpeedAvg: function() {
+    var windSpeedSum = this.windSpeedSum();
+    return windSpeedSum / this.get('windSpeedTotal').length;
   },
 
   minSolarDate: function() {
@@ -67,6 +77,8 @@ module.exports = Backbone.Model.extend({
       bestWindOrientation: this.bestWindOrientation(),
       solarSum: this.solarSum().toLocaleString(),
       windSpeedSum: this.windSpeedSum().toLocaleString(),
+      solarAvg: this.solarAvg().toLocaleString(),
+      windSpeedAvg: this.windSpeedAvg().toLocaleString(),
       minSolarDate: this.minSolarDate(),
       minWindDate: this.minWindDate(),
       maxSolarDate: this.maxSolarDate(),

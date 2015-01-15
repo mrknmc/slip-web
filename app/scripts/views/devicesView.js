@@ -60,7 +60,6 @@ module.exports = Backbone.View.extend({
             device.windSpeedTotal[i] += obj.windSpeedTotal[i];
           }
           // SORRY
-          console.log(obj.minSolarTimestamp);
           device.minSolarTimestamp = Math.min(device.minSolarTimestamp, obj.minSolarTimestamp);
           device.maxSolarTimestamp = Math.max(device.maxSolarTimestamp, obj.maxSolarTimestamp);
           device.minWindTimestamp = Math.min(device.minWindTimestamp, obj.minWindTimestamp);
