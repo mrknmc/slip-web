@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend({
       },
       series: [{
         type: 'area',
-        color: model.get('color'),
+        color: model.getColor(),
         name: model.get('_id'),
         // data: [1,2,3,4,5,6,7,8],
         data: model.intensities(),

@@ -71,7 +71,11 @@ module.exports = Backbone.Model.extend({
         name: this.get('_id'),
         data: this.getData(),
       }
-    ]
+    ];
+  },
+
+  getColor: function() {
+    return this.get('color');
   },
 
   getData: function() {

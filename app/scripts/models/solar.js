@@ -72,6 +72,10 @@ module.exports = Backbone.Model.extend({
     return util.ringIntensities(this.get('solar'));
   },
 
+  getColor: function() {
+    return this.get('colors')[2];
+  },
+
   getRing: function(ring) {
     // have some sensible filter defaults
     var filter = this.get('filter');
