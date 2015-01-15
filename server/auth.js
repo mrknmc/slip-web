@@ -33,13 +33,15 @@ passport.use(new GoogleStrategy({
       // update email if not present yet
       {email: profile.emails[0].value, oauthID: profile.id},
       function(err, user) {
-      if (err) {
-        // Probably let the user know he can't login
-      } else if (user !== null) {
-        // let the user know he's logged in
-        done(err, user);
+        if (err) {
+          // Probably let the user know he can't login
+          done(err, user);
+        } else if (user !== null) {
+          // let the user know he's logged in
+          done(err, user);
+        }
       }
-    });
+    );
   }
 ));
 

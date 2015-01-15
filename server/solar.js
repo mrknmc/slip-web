@@ -11,6 +11,7 @@ exports.findAll = function (req, res) {
       }
     },
     { $unwind: '$solar' },
+    { $sort: { 'deviceId': 1, 'solar.timestamp': 1} },
     { $group: {
         _id: '$deviceId',
         solar: { $push: '$solar' }

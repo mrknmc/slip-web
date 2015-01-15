@@ -11,6 +11,7 @@ exports.findAll = function (req, res) {
       }
     },
     { $unwind: '$wind' },
+    { $sort: { 'deviceId': 1, 'wind.timestamp': 1} },
     { $group: {
         _id: '$deviceId',
         wind: { $push: '$wind' }
