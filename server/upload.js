@@ -59,6 +59,7 @@ exports.addUpload = function(req, res) {
     var first = solar.values[0];
     var first2 = solar.values[8];
     var first3 = solar.values[16];
+    // this is terrible but Android sends the data in anti-clockwise and not clockwise
     var solarVals = [first].concat(solar.values.slice(1, 8).reverse())
       .concat([first2]).concat(solar.values.slice(9, 16).reverse())
       .concat([first3]).concat(solar.values.slice(17, 24).reverse());
