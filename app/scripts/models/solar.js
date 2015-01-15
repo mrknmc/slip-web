@@ -9,7 +9,12 @@ module.exports = Backbone.Model.extend({
 
   defaults: function() {
     return {
-      color: '#ff8c00',
+      colors: [
+        '#331c00',
+        '#bb6700',
+        '#ffba66',
+      ],
+      type: 'spline',
       yAxis: {
         title: 'Light Intensity',
         labels: {
@@ -22,7 +27,7 @@ module.exports = Backbone.Model.extend({
         type: 'datetime',
       },
       plotOptions: {
-        areaspline: {
+        spline: {
           fillOpacity: 0.4,
           marker: {
             enabled: false,
@@ -61,6 +66,37 @@ module.exports = Backbone.Model.extend({
 
   intensities: function() {
     return util.intensities(this.get('solar'));
+  },
+
+  ringIntensities: function() {
+    return util.ringIntensities(this.get('solar'));
+  },
+
+  getRing: function(ring) {
+    // have some sensible filter defaults
+    var filter = this.get('filter');
+    var solar = this.get('solar');
+    return _(this.ringIntensities())
+      .map(function (m) {
+        return {
+          // convert to millis
+          x: moment(m.timestamp, 'X'),
+          y: m.values[ring],
+        };
+      }).filter(function (m) {
+        return m.x >= filter.start && m.x < moment(filter.end).add(1, 'days');
+    }).value();
+  },
+
+  getSeries: function() {
+    var model = this;
+    return _.map([0, 1, 2], function(ring) {
+      return {
+        color: model.get('colors')[ring],
+        name: model.get('_id'),
+        data: model.getRing(ring),
+      };
+    });
   },
 
   getData: function() {

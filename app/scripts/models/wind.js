@@ -10,6 +10,7 @@ module.exports = Backbone.Model.extend({
   defaults: function() {
     return {
       color: '#87cefa',
+      type: 'areaspline',
       yAxis: {
         title: 'Wind Speed',
         labels: {
@@ -61,6 +62,16 @@ module.exports = Backbone.Model.extend({
 
   intensities: function() {
     return util.windSpeeds(this.get('wind'));
+  },
+
+  getSeries: function() {
+    return [
+      {
+        color: this.get('color'),
+        name: this.get('_id'),
+        data: this.getData(),
+      }
+    ]
   },
 
   getData: function() {

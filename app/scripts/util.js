@@ -47,6 +47,22 @@ function minTimestamp(msrments) {
 
 
 /**
+* Return max along each ring.
+*/
+function ringIntensities(msrments) {
+  return _.map(msrments, function(m) {
+    var inRing = _.max(innerRing(m));
+    var midRing = _.max(middleRing(m));
+    var outRing = _.max(outerRing(m));
+    return {
+      values: [inRing, midRing, outRing],
+      timestamp: m.timestamp,
+    }
+  });
+}
+
+
+/**
 * Computes windSpeeds into a vector of 8 directions.
 */
 function windSpeeds(msrments) {
@@ -131,6 +147,7 @@ exports.middleRing = middleRing;
 exports.outerRing = outerRing;
 exports.intensitySum = intensitySum;
 exports.intensityAngle = intensityAngle;
+exports.ringIntensities = ringIntensities;
 exports.intensities = intensities;
 exports.windSpeeds = windSpeeds;
 exports.orientations = ['North', 'North East', 'East', 'South East', 'South', 'South West', 'West', 'North West'];

@@ -20,18 +20,14 @@ module.exports = Backbone.View.extend({
 
     this.$panelBody = this.$('.panel-body');
     this.$panelBody.highcharts({
-      chart: {type: 'areaspline'},
+      chart: {type: model.get('type')},
       legend: {enabled: false},
       credits: {enabled: false},
       title: model.title(),
       xAxis: model.get('xAxis'),
       yAxis: model.get('yAxis'),
       plotOptions: model.get('plotOptions'),
-      series: [{
-        color: model.get('color'),
-        name: model.get('_id'),
-        data: model.getData(),
-      }]
+      series: model.getSeries(),
     });
     this.chart = this.$panelBody.highcharts();
     return this;
