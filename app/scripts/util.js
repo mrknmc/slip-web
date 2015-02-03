@@ -57,7 +57,7 @@ function ringIntensities(msrments) {
     return {
       values: [inRing, midRing, outRing],
       timestamp: m.timestamp,
-    }
+    };
   });
 }
 
